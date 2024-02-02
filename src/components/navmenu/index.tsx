@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 
 const NavMenu = () => {
   const [isUserActive, setUserActive] = useState<boolean>(false);
-  // const [toggleSearch, setToggleSearch] = useState<boolean>(false);
-
   useEffect(() => {
     // apply logic here
-    const active: boolean = true;
-    setUserActive(active);
-  }, []);
+    const active:boolean = false
+    setUserActive(active)
+  }, [])
 
   const renderActiveUserMenu = (): JSX.Element => {
     return (
@@ -44,18 +42,12 @@ const NavMenu = () => {
   const renderDefaultUserMenu = (): JSX.Element => {
     return (
       <>
-        <button
-          type="button"
-          className="rounded-md bg-white px-[1rem] py-[0.75rem] text-primary-500 text-lg leading-[normal]"
-        >
+        <a href="/login" className="rounded-md bg-white px-[1rem] py-[0.75rem] text-primary-500 text-lg leading-[normal]">
           Login
-        </button>
-        <button
-          type="button"
-          className="rounded-md bg-primary-500 px-[1rem] py-[0.75rem] text-[white] text-lg leading-[normal]"
-        >
+        </a>
+        <a href="/signup" className="rounded-md bg-primary-500 px-[1rem] py-[0.75rem] text-[white] text-lg leading-[normal]">
           Signup
-        </button>
+        </a>
       </>
     );
   };
