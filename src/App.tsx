@@ -1,15 +1,23 @@
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { MainPage, Login, Signup, CreatePost, EditPost } from "./pages";
+import {
+  MainPage,
+  Login,
+  Signup,
+  CreatePost,
+  EditPost,
+  NotFoundPage,
+} from "./pages";
 
 function App() {
-  useEffect(() => {
-    document.title = "MG-Blogs";
-  }, []);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<Signup />} />
+        <Route path="/post/:profile-id/create-post" element={<CreatePost />} />
+        <Route path="/post/:profile-id/edit-post" element={<EditPost />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
