@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<Signup />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/post/:profile-id/create-post" element={<CreatePost />} />
         <Route path="/post/:profile-id/edit-post" element={<EditPost />} />
         <Route path="*" element={<NotFoundPage />} />
