@@ -1,4 +1,4 @@
-import NavMenu from "../components/navmenu";
+import NavMenu from "../components/NavMenu";
 
 const MainPage = () => {
   return (
