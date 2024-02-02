@@ -9,10 +9,10 @@ const Feed = () => {
       <Trending />
       <CommonDivider orientation="horizontal" />
       <div className="mt-[2rem] grid grid-cols-12 gap-4">
-        <div className="col-span-8 p-4 bg-gray-300">
-        <Post />
+        <div className="col-span-8 p-4">
+          <Post />
         </div>
-        <div className="col-span-4 p-4 bg-gray-500">
+        <div className="col-span-4 p-4">
           <Tags />
         </div>
       </div>
