@@ -53,7 +53,7 @@ const NavMenu = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white fixed w-full top-0 left-0 right-0">
       <div className="flex gap-4 min-h-[5rem] justify-center items-center w-full mx-auto max-w-[1440px] px-[2rem] lg:px-[4rem]">
         <div className="flex gap-[1rem]">
           <a
