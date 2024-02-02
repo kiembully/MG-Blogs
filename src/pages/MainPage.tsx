@@ -1,12 +1,14 @@
-import Feed from "../components/Feed";
+import { Feed, PageLayout } from "../components";
 import NavMenu from "../components/NavMenu";
 
 const MainPage = () => {
   return (
-    <div className="absolute top-0 left-0 h-screen w-screen bg-feed">
-      <NavMenu />
-      <Feed />
-    </div>
+    <PageLayout>
+      <div className="relative h-full w-full bg-feed">
+        <NavMenu />
+        <Feed />
+      </div>
+    </PageLayout>
   );
 };
 
