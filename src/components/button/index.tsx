@@ -26,7 +26,7 @@ const Button: FC<Props> = ({
         `cursor-pointer text-${size}`,
         variant === "default"
           ? "p-2 rounded-md bg-indigo-500 active:bg-indigo-700 text-white"
-          : "text-indigo-500 active:text-indigo-700",
+          : "text-indigo-500 active:text-indigo-700 active:border-b-2 border-indigo-400",
         classNames,
         fullWidth ? "w-full" : "w-max"
       )}

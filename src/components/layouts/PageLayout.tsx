@@ -14,7 +14,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center bg-sky-100">
+    <div className="flex items-center justify-center bg-sky-100">
       {children}
     </div>
   );
