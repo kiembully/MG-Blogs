@@ -27,7 +27,7 @@ const SignUp: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="relative h-full w-full flex flex-row">
+      <div className="relative h-screen w-screen flex flex-row">
         <img
           src="/assets/mg-background.png"
           alt="mg-background"
