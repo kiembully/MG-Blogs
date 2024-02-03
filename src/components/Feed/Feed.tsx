@@ -6,7 +6,7 @@ import { SideMenuContainer } from "./index";
 
 const Feed: React.FC = () => {
   return (
-    <div className=" pt-[2rem] mx-auto max-w-[840px]">
+    <div className="container pt-[2rem] mx-auto max-w-[840px]">
       <Trending />
       <CommonDivider orientation="horizontal" />
       <div className="mt-[2rem] grid grid-cols-12 gap-4">

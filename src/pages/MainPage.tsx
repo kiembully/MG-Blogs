@@ -1,5 +1,6 @@
 import { Feed, PageLayout } from "../components";
 import NavMenu from "../components/NavMenu";
+import TextField from "../components/textfield";
 
 const MainPage = () => {
   return (

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { PageLayout } from "../components";
+import TextField from "../components/textfield";
+import Button from "../components/button";
 
 type LoginTypes = {
   username: string;
@@ -41,32 +43,30 @@ const Login: React.FC = () => {
           </span>
           <form className="relative w-72 flex flex-col item-start justify-start mb-28">
             <p className="text-xl">Login</p>
-            <p className="text-sm mt-6">Username</p>
-            <input
+            <TextField
+              label="Username"
               type="text"
               value={credentials.username}
               name="username"
+              fullWidth
               onChange={onChange}
-              className="h-10 w-full mt-2 bg-neutral-100 outline-none text-sm pl-4 text-black/75"
+              classNames="mt-4"
             />
-            <p className="text-sm mt-6">Password</p>
-            <input
+            <TextField
+              label="Password"
               type="password"
               value={credentials.password}
               name="password"
+              fullWidth
               onChange={onChange}
-              className="h-10 w-full mt-2 bg-neutral-100 outline-none text-sm pl-4 text-black/75"
+              classNames="mt-4"
             />
-            <a href="#" className="text-xs text-primary-500">
+            <a href="#" className="text-xs text-primary-500 mt-2">
               Forgot your password?
             </a>
-            <button
-              type="button"
-              onClick={() => onSubmit()}
-              className="relative mt-12 h-10 w-full bg-primary-500 rounded text-white"
-            >
+            <Button classNames="mt-8" onClick={() => onSubmit()} fullWidth>
               Login
-            </button>
+            </Button>
           </form>
         </div>
       </div>

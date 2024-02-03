@@ -44,13 +44,13 @@ const NavMenu: React.FC = () => {
       <>
         <a
           href="/login"
-          className="rounded-md bg-white px-[1rem] py-[0.75rem] text-primary-500 text-lg leading-[normal]"
+          className="rounded-md bg-white px-4 py-4 text-primary-500 text-lg leading-none"
         >
           Login
         </a>
         <a
           href="/signup"
-          className="rounded-md bg-primary-500 px-[1rem] py-[0.75rem] text-[white] text-lg leading-[normal]"
+          className="rounded-md bg-primary-500 px-4 py-4 text-[white] text-lg leading-none"
         >
           Signup
         </a>
@@ -69,9 +69,9 @@ const NavMenu: React.FC = () => {
             {/* icon here  */}
           </a>
           <p className="neutral-800">
-            <span className="text-lg text-[tail]">MASHUP</span>
-            garage
-            <span>Blogs</span>
+            <span className="text-md font-black text-[tail]">MASHUP</span>
+            <span className="text-lg">garage</span>
+            <span className="text-lg"> Blogs</span>
           </p>
         </div>
         <div className="flex flex-auto px-[2.5rem] justify-center">
