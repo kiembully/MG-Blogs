@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Button from '../../button'
+import Button from '../../Button'
 import { useNavigate } from 'react-router-dom'
 import Interaction from '../Interaction'
 

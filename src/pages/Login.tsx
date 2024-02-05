@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import TextField from '../components/textfield'
-import Button from '../components/button'
+import TextField from '../components/TextField'
+import Button from '../components/Button'
 import { AuthenticationPagesLayout } from '../components'
 import { LoginCredentials } from '../helpers'
 

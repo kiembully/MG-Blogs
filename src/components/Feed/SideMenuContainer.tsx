@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import { FC, useState } from 'react'
 import { Options, Languages, Footer } from './index'
 import Tags from '../Tags'
-import Button from '../button'
+import Button from '../Button'
 import ProfileCard from '../Profile/ProfileCard'
 import { useNavigate } from 'react-router-dom'
+import Modal from '../Modal'
 
 type Props = {
   variant?: 'feed' | 'profile'
@@ -12,6 +13,8 @@ type Props = {
 
 const SideMenuContainer: FC<Props> = ({ variant, isUserActive }) => {
   const navigate = useNavigate()
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <>
@@ -26,6 +29,10 @@ const SideMenuContainer: FC<Props> = ({ variant, isUserActive }) => {
           <Options />
           <Languages />
           <Footer />
+          <Button onClick={() => setIsOpen(!isOpen)}>Testing modal</Button>
+          <Modal isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
+            wasup
+          </Modal>
         </>
       ) : (
         <ProfileCard />
@@ -35,3 +42,4 @@ const SideMenuContainer: FC<Props> = ({ variant, isUserActive }) => {
 }
 
 export default SideMenuContainer
+
