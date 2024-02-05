@@ -1,26 +1,25 @@
-import { PageLayout } from "./layouts";
+import React from 'react'
+import { PageLayout } from './layouts'
 
 type ChildrenProps = {
-  children: JSX.Element | JSX.Element[];
-};
+  children: JSX.Element | JSX.Element[]
+}
 
-const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({
-  children,
-}: ChildrenProps) => {
+const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: ChildrenProps) => {
   return (
     <PageLayout>
-      <div className="relative h-full w-full flex flex-row">
+      <div className='relative h-full w-full flex flex-row'>
         <img
-          src="/assets/mg-background.png"
-          alt="mg-background"
-          className="relative h-full w-1/2 aspect-auto"
+          src='/assets/mg-background.png'
+          alt='mg-background'
+          className='relative h-full w-1/2 aspect-auto'
         />
-        <div className="relative h-full w-1/2 bg-white flex items-center justify-center">
+        <div className='relative h-full w-1/2 bg-white flex items-center justify-center'>
           {children}
         </div>
       </div>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default AuthenticationPagesLayout;
+export default AuthenticationPagesLayout

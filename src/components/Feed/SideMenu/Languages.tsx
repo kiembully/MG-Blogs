@@ -1,5 +1,6 @@
+import React from 'react'
 const Languages: React.FC = () => {
-  return <></>;
-};
+  return <></>
+}
 
-export default Languages;
+export default Languages
