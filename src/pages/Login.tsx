@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
-import { PageLayout } from '../components'
 import TextField from '../components/textfield'
 import Button from '../components/button'
-// import { AuthenticationPagesLayout } from '../components'
-
-type LoginTypes = {
-  username: string
-  password: string
-}
+import { AuthenticationPagesLayout } from '../components'
+import { LoginCredentials } from '../helpers'
 
 const Login: React.FC = () => {
-  const [credentials, setCredentials] = useState<LoginTypes>({
+  const [credentials, setCredentials] = useState<LoginCredentials>({
     username: '',
     password: ''
   })
@@ -25,7 +20,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <PageLayout>
+    <AuthenticationPagesLayout>
       <div className='relative h-full w-full flex flex-row'>
         <img
           src='/assets/mg-background.png'
@@ -68,7 +63,7 @@ const Login: React.FC = () => {
           </form>
         </div>
       </div>
-    </PageLayout>
+    </AuthenticationPagesLayout>
   )
 }
 

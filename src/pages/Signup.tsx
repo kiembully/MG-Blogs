@@ -1,18 +1,11 @@
 import React, { useState } from 'react'
-// import { PageLayout } from '../components'
+import { AuthenticationPagesLayout } from '../components'
+import { SignUpCredentials } from '../helpers'
 import TextField from '../components/textfield'
 import Button from '../components/button'
-import { AuthenticationPagesLayout } from '../components'
-
-type UserTypes = {
-  fullname: string
-  email: string
-  username: string
-  password: string
-}
 
 const SignUp: React.FC = () => {
-  const [user, setUser] = useState<UserTypes>({
+  const [user, setUser] = useState<SignUpCredentials>({
     fullname: '',
     email: '',
     username: '',
