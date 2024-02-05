@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import { PageLayout } from "../components";
+import React from 'react'
+import { PageLayout } from '../components'
 const NotFoundPage: React.FC = () => {
   return (
     <PageLayout is404={true}>
       <></>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

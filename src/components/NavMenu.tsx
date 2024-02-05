@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const NavMenu: React.FC = () => {
   const [isUserActive, setUserActive] = useState<boolean>(false)
   useEffect(() => {
     // apply logic here
-    const active: boolean = false
+    const active = false
     setUserActive(active)
   }, [])
 

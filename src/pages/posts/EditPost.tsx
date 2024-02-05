@@ -1,5 +1,7 @@
-const EditPost = () => {
-  return <></>;
-};
+import React from 'react'
 
-export default EditPost;
+const EditPost = () => {
+  return <></>
+}
+
+export default EditPost
