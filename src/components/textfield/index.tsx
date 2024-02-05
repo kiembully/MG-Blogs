@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 import cn from 'classnames'
 
 type Props = {
@@ -16,9 +16,9 @@ type Props = {
 }
 
 const TextField: FC<Props> = ({
-  children,
+  // children,
   label,
-  insideLogo,
+  // insideLogo,
   placeholder,
   value,
   type = 'text',

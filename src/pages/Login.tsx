@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { AuthenticationPagesLayout } from '../components'
+import React, { useState } from 'react'
 import TextField from '../components/textfield'
 import Button from '../components/button'
+import { AuthenticationPagesLayout } from '../components'
 import { LoginCredentials } from '../helpers'
 
 const Login: React.FC = () => {
@@ -54,7 +54,7 @@ const Login: React.FC = () => {
               onChange={onChange}
               classNames='mt-2'
             />
-            <a href='#' className='text-xs text-primary-500 mt-2'>
+            <a href='/' className='text-xs text-primary-500 mt-2'>
               Forgot your password?
             </a>
             <Button classNames='mt-8' onClick={() => onSubmit()} fullWidth>
