@@ -3,5 +3,6 @@ module.exports = {
   singleQuote: true,
   jsxSingleQuote: true,
   trailingComma: 'none',
-  semi: false
-};
+  semi: false,
+  endOfLine: 'crlf'
+}
