@@ -13,7 +13,11 @@ type CreatePostTypes = {
   tags: Tag[]
 }
 
-const NewPost = () => {
+type PostFormFieldProps = {
+  variant: string
+}
+
+const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
   const [newPost, setNewPost] = useState<CreatePostTypes>({
     title: '',
     bodyText: '',
@@ -43,7 +47,7 @@ const NewPost = () => {
   return (
     <div className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen'>
       <div className='flex'>
-        <h1 className='flex-auto'>Create Post</h1>
+        <h1 className='flex-auto'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
         <p>
           Draft <span>12</span>
         </p>
@@ -86,7 +90,7 @@ const NewPost = () => {
           </div>
         </div>
         <div className='flex flex-row-reverse gap-2'>
-          <Button classNames='mt-6'>Post</Button>
+          <Button classNames='mt-6'>{variant === 'create' ? 'Post' : 'Update'}</Button>
           <Button classNames='mt-6' variant='outlined'>
             Save as Draft
           </Button>
@@ -96,4 +100,4 @@ const NewPost = () => {
   )
 }
 
-export default NewPost
+export default PostFormField
