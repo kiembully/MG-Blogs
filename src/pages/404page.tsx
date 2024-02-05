@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { PageLayout } from "../components";
-const NotFoundPage = () => {
+const NotFoundPage: React.FC = () => {
   return (
     <PageLayout is404={true}>
       <></>
