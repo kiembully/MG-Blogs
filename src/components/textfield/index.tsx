@@ -29,7 +29,7 @@ const TextField: FC<Props> = ({
 }) => {
   return (
     <div className={classNames}>
-      <p className='text-sm mb-2'>{label}</p>
+      <p className='mb-2'>{label}</p>
       <input
         name={name}
         value={value}

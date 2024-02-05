@@ -21,48 +21,42 @@ const Login: React.FC = () => {
 
   return (
     <AuthenticationPagesLayout>
-      <div className='relative h-full w-full flex flex-row'>
-        <img
-          src='/assets/mg-background.png'
-          alt='mg-background'
-          className='relative h-full w-1/2 aspect-auto'
+      <span className='absolute top-6 right-8'>
+        New to Mashup Garage Blogs?{' '}
+        <a href='/signup' className='underline text-primary-500 underline-offset-2'>
+          Sign up
+        </a>
+      </span>
+      <form className='relative w-72 flex flex-col item-start justify-start mb-28'>
+        <p className='text-2xl font-medium'>Login</p>
+        <TextField
+          label='Username'
+          type='text'
+          value={credentials.username}
+          name='username'
+          fullWidth
+          onChange={onChange}
+          classNames='mt-2'
         />
-        <div className='relative h-screen w-1/2 bg-white flex items-center justify-center'>
-          <span className='absolute top-6 right-8 text-sm'>
-            New to Mashup Garage Blogs?{' '}
-            <a href='/signup' className='underline text-primary-500 underline-offset-2'>
-              Sign up
-            </a>
-          </span>
-          <form className='relative w-72 flex flex-col item-start justify-start mb-28'>
-            <p className='text-xl'>Login</p>
-            <TextField
-              label='Username'
-              type='text'
-              value={credentials.username}
-              name='username'
-              fullWidth
-              onChange={onChange}
-              classNames='mt-2'
-            />
-            <TextField
-              label='Password'
-              type='password'
-              value={credentials.password}
-              name='password'
-              fullWidth
-              onChange={onChange}
-              classNames='mt-2'
-            />
-            <a href='/' className='text-xs text-primary-500 mt-2'>
-              Forgot your password?
-            </a>
-            <Button classNames='mt-8' onClick={() => onSubmit()} fullWidth>
-              Login
-            </Button>
-          </form>
-        </div>
-      </div>
+        <TextField
+          label='Password'
+          type='password'
+          value={credentials.password}
+          name='password'
+          fullWidth
+          onChange={onChange}
+          classNames='mt-2'
+        />
+        <a
+          href={`/forgot-password?profileID=${'12321312qeqw'}`}
+          className='text-xs text-primary-500 mt-2'
+        >
+          Forgot your password?
+        </a>
+        <Button classNames='mt-8' onClick={() => onSubmit()} fullWidth>
+          Login
+        </Button>
+      </form>
     </AuthenticationPagesLayout>
   )
 }

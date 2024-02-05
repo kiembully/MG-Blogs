@@ -15,7 +15,7 @@ const ForgotPassword: React.FC = () => {
     <AuthenticationPagesLayout>
       <span className='absolute top-6 right-8'>
         Remembered your account?{' '}
-        <a href='/signup' className='underline text-primary-500 underline-offset-2'>
+        <a href='/login' className='underline text-primary-500 underline-offset-2'>
           Sign in
         </a>
       </span>
