@@ -7,7 +7,7 @@ const MainPage: React.FC = () => {
   return (
     <PageLayout>
       <NavMenuLayout>
-        <Feed />
+        <Feed isUserActive={false} />
       </NavMenuLayout>
     </PageLayout>
   )

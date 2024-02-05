@@ -17,7 +17,8 @@ const Button: FC<Props> = ({
   size = 'md',
   classNames,
   fullWidth,
-  disabled
+  disabled,
+  onClick
 }) => {
   const renderButtonStyle = (val: string) => {
     switch (val) {
@@ -43,6 +44,7 @@ const Button: FC<Props> = ({
         fullWidth ? 'w-full' : 'w-max'
       )}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>
