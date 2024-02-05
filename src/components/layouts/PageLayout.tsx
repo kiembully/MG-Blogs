@@ -13,11 +13,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     document.title = is404 ? "404 not found" : "MG Blogs";
   }, []);
 
-  return (
-    <div className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center bg-sky-100">
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 };
 
 export default PageLayout;
