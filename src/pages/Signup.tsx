@@ -6,7 +6,7 @@ import Button from '../components/button'
 
 const SignUp: React.FC = () => {
   const [user, setUser] = useState<SignUpCredentials>({
-    fullname: '',
+    name: '',
     email: '',
     username: '',
     password: ''
@@ -35,8 +35,8 @@ const SignUp: React.FC = () => {
           <TextField
             label='Full name'
             type='text'
-            name='fullname'
-            value={user.fullname}
+            name='name'
+            value={user.name}
             onChange={onChange}
             fullWidth
             classNames='mt-4'
