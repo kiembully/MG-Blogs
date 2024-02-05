@@ -7,7 +7,7 @@ import { SideMenuContainer } from './index'
 
 const Feed: React.FC = () => {
   return (
-    <div className='container pt-8 mx-auto max-w-[840px]'>
+    <div className='container min-h-screen pt-8 mx-auto max-w-[840px]'>
       <Trending />
       <CommonDivider orientation='horizontal' />
       <div className='mt-8 grid grid-cols-12 gap-8'>

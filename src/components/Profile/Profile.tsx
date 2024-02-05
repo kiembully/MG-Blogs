@@ -7,7 +7,7 @@ type Props = {
   variant?: 'empty' | 'own' | 'else' // profile states
 }
 
-const ProfileLayout: FC<Props> = ({ variant = 'empty' }) => {
+const ProfileLayout: FC<Props> = ({ variant = '' }) => {
   const renderPosts = (val: string) => {
     switch (val) {
       case 'else': {

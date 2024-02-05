@@ -1,7 +1,10 @@
 import React from 'react'
 import Button from '../../button'
+import { useNavigate } from 'react-router-dom'
 
 const PostCard = () => {
+  const navigate = useNavigate()
+
   return (
     <div className='flex w-full min-h-72 bg-white mb-4 rounded-md shadow-lg'>
       <div className='flex flex-col w-14 min-h-full bg-neutral-100 p-4'>
@@ -22,7 +25,7 @@ const PostCard = () => {
           <Button variant='ghost'>
             <img alt='up vote icon' src='/icons/share-icon.svg' />
           </Button>
-          <Button variant='ghost'>
+          <Button variant='ghost' onClick={() => navigate('/post/1/edit-post')}>
             <img alt='up vote icon' src='/icons/write-icon.svg' />
           </Button>
           <Button variant='ghost'>
@@ -34,7 +37,9 @@ const PostCard = () => {
         <div className='mb-4'>
           <div className='flex gap-2 flex-auto items-center'>
             <img alt='post avatar' src='/icons/default-avatar.png' className='h-5 w-5' />
-            <p className='font-medium flex-auto'>Kirby Borromeo</p>
+            <a href='/profile' className='font-medium flex-auto'>
+              Kirby Borromeo
+            </a>
             <div className='flex items-center gap-1 text-gray-500'>
               <img alt='clock icon' src='/icons/ion_time-outline.svg' className='w-4 h-4' />
               <p>6 hours ago</p>

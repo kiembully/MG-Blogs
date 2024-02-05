@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Options, Languages, Footer } from './index'
 import Tags from '../Tags'
 import Button from '../button'
+import ProfileCard from '../Profile/ProfileCard'
 
-const SideMenuContainer: React.FC = () => {
+type Props = {
+  variant?: 'feed' | 'profile' // profile states
+}
+
+const SideMenuContainer: FC<Props> = ({ variant }) => {
   return (
     <>
-      <Button fullWidth>Create Post</Button>
-      <Tags />
-      <Options />
-      <Languages />
-      <Footer />
+      {variant === 'feed' ? (
+        <>
+          <Button fullWidth>Create Post</Button>
+          <Tags />
+          <Options />
+          <Languages />
+          <Footer />
+        </>
+      ) : (
+        <ProfileCard />
+      )}
     </>
   )
 }
