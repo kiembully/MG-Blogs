@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import { AuthenticationPagesLayout } from "../components";
-
-type UserTypes = {
-  fullname: string;
-  email: string;
-  username: string;
-  password: string;
-};
+import { SignUpCredentials } from "../helpers";
 
 const SignUp: React.FC = () => {
-  const [user, setUser] = useState<UserTypes>({
+  const [user, setUser] = useState<SignUpCredentials>({
     fullname: "",
     email: "",
     username: "",

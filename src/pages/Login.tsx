@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { AuthenticationPagesLayout } from "../components";
-
-type LoginTypes = {
-  username: string;
-  password: string;
-};
+import { LoginCredentials } from "../helpers";
 
 const Login: React.FC = () => {
-  const [credentials, setCredentials] = useState<LoginTypes>({
+  const [credentials, setCredentials] = useState<LoginCredentials>({
     username: "",
     password: "",
   });
