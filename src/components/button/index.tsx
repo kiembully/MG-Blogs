@@ -3,7 +3,7 @@ import cn from "classnames";
 
 type Props = {
   children: ReactNode;
-  variant?: "default" | "ghost";
+  variant?: "default" | "ghost" | "outlined";
   size?: "sm" | "md" | "lg";
   classNames?: string;
   disabled?: boolean;
@@ -19,14 +19,26 @@ const Button: FC<Props> = ({
   fullWidth,
   disabled,
 }) => {
+  const renderButtonStyle = (val:string) => {
+    switch (val) {
+      case "ghost": {
+        return "text-indigo-500 active:text-indigo-700 active:border-b-2 border-indigo-400"
+      }
+      case "outlined": {
+        return "p-2 rounded-md border text-indigo-500 active:text-indigo-700 active:border-b-2 border-indigo-500"
+      }
+      default: {
+        return "p-2 rounded-md bg-indigo-500 active:bg-indigo-700 text-white"
+      }
+    }
+  }
+
   return (
     <button
       type="button"
       className={cn(
         `cursor-pointer text-${size}`,
-        variant === "default"
-          ? "p-2 rounded-md bg-indigo-500 active:bg-indigo-700 text-white"
-          : "text-indigo-500 active:text-indigo-700 active:border-b-2 border-indigo-400",
+        renderButtonStyle(variant),
         classNames,
         fullWidth ? "w-full" : "w-max"
       )}
