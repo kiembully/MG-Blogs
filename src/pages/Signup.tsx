@@ -32,12 +32,12 @@ const SignUp: React.FC = () => {
     <AuthenticationPagesLayout>
       <span className='absolute top-6 right-8'>
         Already a member?{' '}
-        <a href='/login' className='underline text-[#6366F1] underline-offset-2'>
+        <a href='/login' className='underline text-indigo-500 underline-offset-2'>
           Sign in
         </a>
       </span>
-      <form className='relative w-72 bg-white flex items-center justify-center'>
-        <div className='relative w-72 flex flex-col item-start justify-start'>
+      <form className='w-72 h-screen flex items-center justify-center'>
+        <div className='relative my-autoflex flex-col item-start justify-start'>
           <p className='text-2xl font-medium'>Sign Up</p>
           <TextField
             label='Full name'
