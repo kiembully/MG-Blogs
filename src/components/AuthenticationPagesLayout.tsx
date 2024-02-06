@@ -8,13 +8,13 @@ type ChildrenProps = {
 const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: ChildrenProps) => {
   return (
     <PageLayout>
-      <div className='relative h-full w-full flex flex-row'>
+      <div className='relative h-screen w-screen flex flex-row'>
         <img
           src='/assets/mg-background.png'
           alt='mg-background'
           className='relative h-full w-1/2 aspect-auto'
         />
-        <div className='relative h-full w-1/2 bg-white flex items-center justify-center'>
+        <div className='relative h-full w-1/2 bg-white flex flex-col items-center justify-center'>
           {children}
         </div>
       </div>
