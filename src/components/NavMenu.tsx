@@ -67,7 +67,13 @@ const NavMenu: React.FC = () => {
     <div className='bg-white px-16'>
       <div className='flex gap-4 min-h-20 justify-center items-center w-full mx-auto max-w-[1440px] px-4 lg:px-8'>
         <div className='flex gap-2'>
-          <img height='24px' src='/icons/mg-logo.svg' alt='mg-logo' />
+          <img
+            height='24px'
+            src='/icons/mg-logo.svg'
+            alt='mg-logo'
+            className='cursor-pointer'
+            onClick={() => navigate('/')}
+          />
           <span className='text-xl neutral-800'> Blogs</span>
         </div>
         <div className='flex flex-auto px-12 justify-center'>
