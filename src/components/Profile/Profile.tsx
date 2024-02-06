@@ -22,7 +22,7 @@ const ProfileLayout: FC<Props> = () => {
 
   const renderPosts = (val: boolean) => {
     if (val) {
-      return <Post />
+      return <Post variant='' />
     } else {
       return <EmptyPost />
     }

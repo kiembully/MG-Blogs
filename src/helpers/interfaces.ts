@@ -14,8 +14,8 @@ export interface User {
   id: number
   username: string
   name: string
-  created_at: Date
-  updated_at: Date
+  created_at: string //this is date and time
+  updated_at: string //this is date and time
   email: string
   jti: string
 }
@@ -24,9 +24,8 @@ export interface Post {
   title: string
   body: string
   tags: string[]
-  votes: number
-  // voteCounts: VoteCount
-  // image?: string | Blob
+  voteCounts: VoteCount
+  image?: string | Blob
   comments: Comment[]
 }
 
@@ -39,8 +38,8 @@ export interface Comment {
   creatorID: BigInt
   postID: BigInt
   message: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string //this is date and time
+  updatedAt: string //this is date and time
   voteCounts: VoteCount
   replies: Comment[]
 }
