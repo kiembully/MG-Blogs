@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PageLayout } from './layouts'
+import { useNavigate } from 'react-router'
 
 type ChildrenProps = {
   children: JSX.Element | JSX.Element[]
 }
 
 const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: ChildrenProps) => {
+  const navigate = useNavigate()
+  // const restrictedClientRoute = ['/signin', '/login']
+
+  useEffect(() => {
+    const data = localStorage.getItem('user')
+    if (data) {
+      navigate('/')
+    }
+  }, [])
+
   return (
     <PageLayout>
       <div className='relative h-screen w-screen flex flex-row'>

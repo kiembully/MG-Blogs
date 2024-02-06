@@ -4,14 +4,20 @@ import { SignUpCredentials } from '../helpers'
 import TextField from '../components/TextField'
 import Button from '../components/Button'
 import { signup } from '../api'
+import CommonSpinner from '../components/CommonSpinner'
+import { useNavigate } from 'react-router'
 
 const SignUp: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean | undefined>(false)
+  const [resMessage, setResMessage] = useState<string>('')
   const [user, setUser] = useState<SignUpCredentials>({
     fullname: '',
     email: '',
     username: '',
     password: ''
   })
+  const navigate = useNavigate()
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -19,14 +25,21 @@ const SignUp: React.FC = () => {
   }
 
   const onSubmit = async () => {
-    const res = await signup({
+    setLoading(true)
+    await signup({
       fullname: user.fullname,
       email: user.email,
       username: user.username,
       password: user.password
-    })
+    }).then((res) => {
+      setLoading(false)
+      setError(res.error)
+      setResMessage(res.message)
 
-    window.alert(res.message)
+      if (!res.error) {
+        navigate('/')
+      }
+    })
   }
 
   return (
@@ -48,6 +61,7 @@ const SignUp: React.FC = () => {
             onChange={onChange}
             fullWidth
             classNames='mt-4'
+            disabled={loading}
           />
           <TextField
             label='Email'
@@ -57,6 +71,7 @@ const SignUp: React.FC = () => {
             onChange={onChange}
             fullWidth
             classNames='mt-4'
+            disabled={loading}
           />
           <TextField
             label='Username'
@@ -66,6 +81,7 @@ const SignUp: React.FC = () => {
             onChange={onChange}
             fullWidth
             classNames='mt-4'
+            disabled={loading}
           />
           <TextField
             label='Password'
@@ -75,6 +91,7 @@ const SignUp: React.FC = () => {
             onChange={onChange}
             fullWidth
             classNames='mt-4'
+            disabled={loading}
           />
           <span className='text-sm mt-6'>
             By continuing you are setting up a Mashup Garage Blog account and agree to our{' '}
@@ -86,9 +103,10 @@ const SignUp: React.FC = () => {
               Privacy Policy
             </a>
           </span>
-          <Button classNames='mt-6' fullWidth onClick={() => onSubmit()}>
-            Sign up
+          <Button classNames='mt-6' fullWidth onClick={() => onSubmit()} disabled={loading}>
+            {loading ? <CommonSpinner /> : 'Sign up'}
           </Button>
+          <p className={`text-center text-xs ${error && 'text-[red]'}`}>{resMessage}</p>
         </div>
       </form>
     </AuthenticationPagesLayout>

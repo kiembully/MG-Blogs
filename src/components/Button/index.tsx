@@ -43,7 +43,8 @@ const Button: FC<Props> = ({
         `cursor-pointer text-${size}`,
         renderButtonStyle(variant),
         classNames,
-        fullWidth ? 'w-full' : 'w-max'
+        fullWidth ? 'w-full' : 'w-max',
+        disabled && 'bg-neutral-300 cursor-not-allowed'
       )}
       disabled={disabled}
       onClick={onClick}

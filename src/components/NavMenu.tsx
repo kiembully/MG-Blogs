@@ -7,11 +7,12 @@ const NavMenu: React.FC = () => {
   const [user, setUser] = useState<User | null>()
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('user') || '')
+    const data = localStorage.getItem('user')
+    console.log(localStorage.getItem('user'))
     if (data) {
-      setUser(data)
+      setUser(JSON.parse(data))
     }
-  }, [])
+  }, [user])
 
   const renderActiveUserMenu = (): JSX.Element => {
     return (
