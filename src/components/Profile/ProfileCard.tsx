@@ -11,7 +11,7 @@ const ProfileCard = () => {
       <div className='size-[4.5rem] rounded-full bg-neutral-100 border border-[4px] border-[white] mt-[-2.25rem] ml-[1.5rem]'></div>
       <div className='flex flex-col px-[1.5rem] py-[1rem] gap-2'>
         <p>Kirby Borromeo</p>
-        <Button fullWidth onClick={() => navigate('/post/1/create-post')}>
+        <Button fullWidth onClick={() => navigate('/post/create-post')}>
           Create Post
         </Button>
       </div>

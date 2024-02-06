@@ -3,6 +3,7 @@ import { AuthenticationPagesLayout } from '../components'
 import { SignUpCredentials } from '../helpers'
 import TextField from '../components/TextField'
 import Button from '../components/Button'
+import { signup } from '../api'
 
 const SignUp: React.FC = () => {
   const [user, setUser] = useState<SignUpCredentials>({
@@ -17,8 +18,15 @@ const SignUp: React.FC = () => {
     setUser((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  const onSubmit = () => {
-    console.log({ user })
+  const onSubmit = async () => {
+    const res = await signup({
+      fullname: user.fullname,
+      email: user.email,
+      username: user.username,
+      password: user.password
+    })
+
+    window.alert(res.message)
   }
 
   return (

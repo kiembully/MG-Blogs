@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { User } from '../helpers'
+import { useNavigate } from 'react-router-dom'
 
 const NavMenu: React.FC = () => {
-  const [isUserActive, setUserActive] = useState<boolean>(false)
+  const navigate = useNavigate()
+  const [user, setUser] = useState<User | null>()
+
   useEffect(() => {
-    // apply logic here
-    const active = false
-    setUserActive(active)
+    const data = JSON.parse(localStorage.getItem('user') || '')
+    if (data) {
+      setUser(data)
+    }
   }, [])
 
   const renderActiveUserMenu = (): JSX.Element => {
@@ -24,9 +29,12 @@ const NavMenu: React.FC = () => {
           <img alt='add icon' src='/icons/add-icon.png' />
         </button>
         <span className='h-12 w-[1px] bg-neutral-200'></span>
-        <div className='flex justify-center items-center gap-4'>
+        <div
+          className='flex justify-center items-center gap-4'
+          onClick={() => navigate(user?.id ? `/profile/${user.id}` : '#')}
+        >
           <img alt='avatar icon' src='/icons/default-avatar.png'></img>
-          <p>Kirby Borromeo</p>
+          <p>{user?.name}</p>
         </div>
         <button>
           <img alt='toggle icon' src='/icons/caret-down-icon.png' />
@@ -71,9 +79,7 @@ const NavMenu: React.FC = () => {
             />
           </div>
         </div>
-        <div className='flex gap-4'>
-          {isUserActive ? renderActiveUserMenu() : renderDefaultUserMenu()}
-        </div>
+        <div className='flex gap-4'>{user ? renderActiveUserMenu() : renderDefaultUserMenu()}</div>
       </div>
     </div>
   )

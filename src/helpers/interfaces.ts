@@ -6,34 +6,27 @@ export interface SignUpCredentials {
 }
 
 export interface LoginCredentials {
-  username: string
+  email: string
   password: string
 }
 
 export interface User {
+  id: number
   username: string
   name: string
-  createdAt: Date
-  updatedAt: Date
+  created_at: Date
+  updated_at: Date
   email: string
-  encryptedPassword: string
-  resetPasswordToken: string
-  resetPasswordSentAt: Date
-  rememberCreatedAt: Date
-  profilePicture?: string | Blob
-  posts?: Post[]
-  comments?: Comment[]
+  jti: string
 }
 
 export interface Post {
-  creatorID: BigInt
   title: string
   body: string
-  createdAt: Date
-  updatedAt: Date
-  tags: Tags[]
-  voteCounts: VoteCount
-  image?: string | Blob
+  tags: string[]
+  votes: number
+  // voteCounts: VoteCount
+  // image?: string | Blob
   comments: Comment[]
 }
 

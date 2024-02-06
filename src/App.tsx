@@ -20,10 +20,10 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/post/:profile-id/create-post' element={<CreatePost />} />
-        <Route path='/post/:profile-id/edit-post' element={<EditPost />} />
+        <Route path='/post/create-post' element={<CreatePost />} />
+        <Route path='/post/:post-id/edit-post' element={<EditPost />} />
         <Route path='/post/:profile-id/view-post' element={<ViewPost />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/:user_id' element={<Profile />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

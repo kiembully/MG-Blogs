@@ -1,24 +1,30 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Post from '../Posts'
 import { SideMenuContainer } from '../Feed'
 import EmptyPost from '../Posts/EmptyPost'
+import { useParams } from 'react-router-dom'
+import { User } from '../../helpers'
 
 type Props = {
   variant?: 'empty' | 'own' | 'else' // profile states
 }
 
-const ProfileLayout: FC<Props> = ({ variant = '' }) => {
-  const renderPosts = (val: string) => {
-    switch (val) {
-      case 'else': {
-        return <Post />
-      }
-      case 'own': {
-        return <Post />
-      }
-      default: {
-        return <EmptyPost />
-      }
+const ProfileLayout: FC<Props> = () => {
+  const { user_id } = useParams()
+  const [variant, setVariant] = useState<boolean>(false)
+
+  useEffect(() => {
+    const data = localStorage.getItem('user')
+    if (data) {
+      setVariant(JSON.parse(data).id === user_id)
+    }
+  }, [])
+
+  const renderPosts = (val: boolean) => {
+    if (val) {
+      return <Post />
+    } else {
+      return <EmptyPost />
     }
   }
 
