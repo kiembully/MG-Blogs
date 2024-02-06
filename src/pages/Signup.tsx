@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { AuthenticationPagesLayout } from '../components'
 import { SignUpCredentials } from '../helpers'
-import TextField from '../components/textfield'
-import Button from '../components/button'
+import TextField from '../components/TextField'
+import Button from '../components/Button'
 
 const SignUp: React.FC = () => {
   const [user, setUser] = useState<SignUpCredentials>({
