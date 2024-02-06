@@ -5,9 +5,13 @@ import { AuthenticationPagesLayout } from '../components'
 import { LoginCredentials } from '../helpers'
 import { signin } from '../api'
 import { useNavigate } from 'react-router-dom'
+import CommonSpinner from '../components/CommonSpinner'
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [resMessage, setResMessage] = useState<string>('')
   const [credentials, setCredentials] = useState<LoginCredentials>({
     email: '',
     password: ''
@@ -19,16 +23,21 @@ const Login: React.FC = () => {
   }
 
   const onSubmit = async () => {
+    setLoading(true)
     const res = await signin({
       email: credentials.email,
       password: credentials.password
     })
 
     if (res.code === 200) {
-      window.alert('Logged in')
+      setLoading(false)
+      setError(false)
+      setResMessage('Success!')
       navigate('/')
     } else {
-      window.alert('Not Logged in')
+      setLoading(false)
+      setError(true)
+      setResMessage('Unable to login user. try again!')
     }
   }
 
@@ -50,6 +59,7 @@ const Login: React.FC = () => {
           fullWidth
           onChange={onChange}
           classNames='mt-2'
+          disabled={loading}
         />
         <TextField
           label='Password'
@@ -59,6 +69,7 @@ const Login: React.FC = () => {
           fullWidth
           onChange={onChange}
           classNames='mt-2'
+          disabled={loading}
         />
         <a
           href={`/forgot-password?profileID=${'12321312qeqw'}`}
@@ -66,9 +77,10 @@ const Login: React.FC = () => {
         >
           Forgot your password?
         </a>
-        <Button classNames='mt-8' onClick={() => onSubmit()} fullWidth>
-          Login
+        <Button classNames='mt-8' onClick={() => onSubmit()} disabled={loading} fullWidth>
+          {loading ? <CommonSpinner /> : 'Login'}
         </Button>
+        <p className={`text-center text-xs ${error && 'text-[red]'}`}>{resMessage}</p>
       </form>
     </AuthenticationPagesLayout>
   )

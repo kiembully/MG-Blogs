@@ -40,8 +40,6 @@ const SignUp: React.FC = () => {
         navigate('/')
       }
     })
-
-    // window.alert(res.message)
   }
 
   return (

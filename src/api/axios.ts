@@ -30,7 +30,7 @@ export const signup = async (data: SignUpCredentials) => {
       }
     })
 
-    localStorage.setItem('Authorization', res.headers.authorization)
+    localStorage.setItem('authorization', res.headers.authorization)
     localStorage.setItem('user', JSON.stringify(res.data.status.data))
 
     return {
