@@ -42,4 +42,3 @@ const SideMenuContainer: FC<Props> = ({ variant, isUserActive }) => {
 }
 
 export default SideMenuContainer
-
