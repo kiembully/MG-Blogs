@@ -16,7 +16,7 @@ const Feed: FC<Props> = ({ isUserActive }) => {
       <CommonDivider orientation='horizontal' />
       <div className='mt-8 grid grid-cols-12 gap-8'>
         <div className='col-span-8'>
-          <Post />
+          <Post variant='all' />
         </div>
         <div className='col-span-4'>
           <SideMenuContainer variant='feed' isUserActive={isUserActive} />

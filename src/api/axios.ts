@@ -96,6 +96,10 @@ export const getAllPosts = async () => {
       method: 'GET',
       url: '/api/posts'
     })
+
+    const data = res.data.data.map((item: any) => item.attributes) || []
+
+    return data
   } catch (error) {
     console.log(error)
   }

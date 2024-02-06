@@ -3,12 +3,14 @@ import Button from '../../Button'
 import { useNavigate } from 'react-router-dom'
 import Interaction from '../Interaction'
 import Conversation from '../Conversation'
+import type { Post } from '../../../helpers'
 
 type Props = {
   viewMode?: boolean
+  post?: Post
 }
 
-const PostCard: FC<Props> = ({ viewMode }) => {
+const PostCard: FC<Props> = ({ viewMode, post }) => {
   const navigate = useNavigate()
 
   return (
@@ -73,7 +75,7 @@ const PostCard: FC<Props> = ({ viewMode }) => {
         </div>
 
         <div>
-          <p className='font-medium text-lg mb-2'>First UI/UX Session in MG Bootcamp 2023</p>
+          <p className='font-medium text-lg mb-2'>{post?.title}</p>
 
           <div className='min-h-48 w-full overflow-hidden rounded-md'>
             <div
