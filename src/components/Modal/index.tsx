@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 import cn from 'classnames'
 import Button from '../Button'
 import CloseIcon from '/icons/close-icon.svg'

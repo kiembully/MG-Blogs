@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Options, Languages, Footer } from './index'
 import Tags from '../Tags'
 import Button from '../Button'
