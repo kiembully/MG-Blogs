@@ -8,6 +8,7 @@ const NavMenu: React.FC = () => {
 
   useEffect(() => {
     const data = localStorage.getItem('user')
+    console.log(localStorage.getItem('user'))
     if (data) {
       setUser(JSON.parse(data))
     }
