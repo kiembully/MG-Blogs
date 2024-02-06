@@ -4,5 +4,5 @@ module.exports = {
   jsxSingleQuote: true,
   trailingComma: 'none',
   semi: false,
-  endOfLine: 'crlf'
+  endOfLine: 'lf'
 }
