@@ -11,6 +11,7 @@ type Props = {
   name?: string
   fullWidth?: boolean
   classNames?: string
+  disabled?: boolean
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onValueChange?: () => void
 }
@@ -25,6 +26,7 @@ const TextField: FC<Props> = ({
   name,
   fullWidth,
   classNames,
+  disabled = false,
   onChange
 }) => {
   return (
@@ -40,6 +42,7 @@ const TextField: FC<Props> = ({
         )}
         placeholder={placeholder}
         onChange={onChange}
+        disabled={disabled}
       />
     </div>
   )

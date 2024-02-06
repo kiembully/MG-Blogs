@@ -51,3 +51,15 @@ export interface VoteCount {
   downVotes: string[] //array of user id's that has down vote
   //will use hashmap to check if a user has upvoted or downvoted the post or comment to render correct icon. It will have O(1) notation.
 }
+
+export interface ApiResponse {
+  message: string
+  response?: {
+    data: {
+      status: {
+        errors: boolean
+        message: string
+      }
+    }
+  }
+}

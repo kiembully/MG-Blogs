@@ -32,10 +32,16 @@ export const signup = async (data: SignUpCredentials) => {
 
     localStorage.setItem('Authorization', res.headers.authorization)
 
-    return { message: res.data.status.message }
+    return {
+      error: false,
+      message: res.data.status.message
+    }
   } catch (error) {
     console.log(error)
-    return { message: 'Unable to Sign up' }
+    return {
+      error: true,
+      message: 'Unable to Sign up'
+    }
   }
 }
 
