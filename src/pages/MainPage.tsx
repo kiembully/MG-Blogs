@@ -1,15 +1,16 @@
-import { Feed, PageLayout } from "../components";
-import NavMenu from "../components/NavMenu";
+import React from 'react'
+// import NavMenu from '../components/NavMenu'
+// import TextField from '../components/textfield'
+import { Feed, PageLayout, NavMenuLayout } from '../components'
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   return (
     <PageLayout>
-      <div className="relative h-full w-full bg-feed">
-        <NavMenu />
-        <Feed />
-      </div>
+      <NavMenuLayout>
+        <Feed isUserActive={false} />
+      </NavMenuLayout>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default MainPage;
+export default MainPage

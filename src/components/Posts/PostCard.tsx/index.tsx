@@ -1,61 +1,91 @@
-const PostCard = () => {
+import React, { FC } from 'react'
+import Button from '../../button'
+import { useNavigate } from 'react-router-dom'
+import Interaction from '../Interaction'
+
+type Props = {
+  viewMode?: boolean
+}
+
+const PostCard: FC<Props> = ({ viewMode }) => {
+  const navigate = useNavigate()
+
   return (
-    <div className="flex w-full min-h-[18rem] bg-white mb-[1rem] rounded-md shadow-md">
-      <div className="flex flex-col w-[3.5rem] min-h-full bg-neutral-100 p-[1rem]">
-        <div className="flex flex-col flex-1 items-center">
-          <button
-            type="button"
-          >
-            <img alt="up vote icon" src="/icons/up-vote.png" />
-          </button>
-          <div>1.1k</div>
-          <button
-            type="button"
-          >
-            <img alt="up vote icon" src="/icons/down-vote.png" />
-          </button>
+    <div
+      className={`flex w-full min-h-72 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse'}`}
+      // onClick={() => navigate('/post/1/view-post')}
+    >
+      {viewMode && <Interaction />}
+      <div
+        className={`flex min-h-full p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
+      >
+        <div className={`flex items-center ${viewMode ? 'flex-row' : 'flex-col flex-1 '}`}>
+          <Button variant='ghost'>
+            <img alt='up vote icon' src='/icons/arrow.svg' />
+          </Button>
+          <p>1.1k</p>
+          <Button variant='ghost'>
+            <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
+          </Button>
         </div>
-        <div className="flex flex-col items-center">
-          <button
-            type="button"
+        <div
+          className={`flex items-center gap-1 ${viewMode ? 'flex-row w-full gap-2' : 'flex-col'}`}
+        >
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
+            <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
+            <p className={`text-black ${viewMode && 'whitespace-nowrap'}`}>
+              24 {viewMode && 'Comments'}
+            </p>
+          </Button>
+          <Button variant='ghost' classNames={viewMode ? 'flex flex-1 gap-1' : ''}>
+            <img alt='up vote icon' src='/icons/share-icon.svg' />
+            {viewMode && <p className='whitespace-nowrap text-black'>Share</p>}
+          </Button>
+          <Button
+            variant='ghost'
+            classNames={viewMode ? 'flex gap-1' : ''}
+            onClick={() => navigate('/post/1/edit-post')}
           >
-            <img alt="up vote icon" src="/icons/ion_chatbubbles-outline.png" />
-          </button>
-          <div className="mb-[0.5rem]">24</div>
-          <button
-            type="button"
-          >
-            <img alt="up vote icon" src="/icons/ion_arrow-redo-outline.png" />
-          </button>
+            <img alt='up vote icon' src='/icons/write-icon.svg' />
+            {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}
+          </Button>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
+            <img alt='up vote icon' src='/icons/delete-icon.svg' />
+            {viewMode && <p className='whitespace-nowrap text-black'>Delete</p>}
+          </Button>
         </div>
       </div>
-      <div className="p-[1rem] w-full">
-
-        <div className="flex gap-[0.25rem] flex-auto">
-          <img alt="post avatar" src="/icons/default-avatar.png" className="h-[1.25rem] w-[1.25rem]" />
-          <p className="flex-auto">Kirby Borromeo</p>
-          <div className="flex items-center">
-            <img alt="clock icon" src="/icons/ion_time-outline.png" className="w-[0.625rem] h-[0.625rem]" />
-            <p>6 hours ago</p>
+      <div className='w-full p-4'>
+        <div className='mb-4'>
+          <div className='flex gap-2 flex-auto items-center'>
+            <img alt='post avatar' src='/icons/default-avatar.png' className='h-5 w-5' />
+            <a href='/profile' className='font-medium flex-auto'>
+              Kirby Borromeo
+            </a>
+            <div className='flex items-center gap-1 text-gray-500'>
+              <img alt='clock icon' src='/icons/ion_time-outline.svg' className='w-4 h-4' />
+              <p>6 hours ago</p>
+            </div>
           </div>
+          <p className='text-gray-500 text-sm'>@design-talks</p>
         </div>
 
-        <p>@design-talks</p>
-
         <div>
-          <div>
-            First UI/UX Session in MG Bootcamp 2023
-          </div>
-          <div className="min-h-[12rem] w-full overflow-hidden rounded-md">
+          <p className='font-medium text-lg mb-2'>First UI/UX Session in MG Bootcamp 2023</p>
+
+          <div className='min-h-48 w-full overflow-hidden rounded-md'>
             <div
-              className="min-h-[12rem] w-full overflow-hidden rounded-md bg-[red]"
-              style={{ backgroundImage: 'url(/assets/post-sample-upload.png)', backgroundSize: 'cover' }}
+              className='min-h-48 w-full overflow-hidden rounded-md bg-neutral-100'
+              style={{
+                backgroundImage: 'url(/assets/post-sample-upload.png)',
+                backgroundSize: 'cover'
+              }}
             ></div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default PostCard;
+export default PostCard

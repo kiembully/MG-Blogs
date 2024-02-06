@@ -1,5 +1,13 @@
-const CreatePost = () => {
-  return <></>;
-};
+import React from 'react'
+import { NavMenuLayout } from '../../components'
+import PostFormField from '../../components/Posts/PostFormField'
 
-export default CreatePost;
+const CreatePost = () => {
+  return (
+    <NavMenuLayout>
+      <PostFormField variant='create' />
+    </NavMenuLayout>
+  )
+}
+
+export default CreatePost
