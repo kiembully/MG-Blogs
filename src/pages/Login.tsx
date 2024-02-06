@@ -3,10 +3,13 @@ import TextField from '../components/TextField'
 import Button from '../components/Button'
 import { AuthenticationPagesLayout } from '../components'
 import { LoginCredentials } from '../helpers'
+import { signin } from '../api'
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
   const [credentials, setCredentials] = useState<LoginCredentials>({
-    username: '',
+    email: '',
     password: ''
   })
 
@@ -15,8 +18,18 @@ const Login: React.FC = () => {
     setCredentials((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  const onSubmit = () => {
-    console.log({ credentials })
+  const onSubmit = async () => {
+    const res = await signin({
+      email: credentials.email,
+      password: credentials.password
+    })
+
+    if (res.code === 200) {
+      window.alert('Logged in')
+      navigate('/')
+    } else {
+      window.alert('Not Logged in')
+    }
   }
 
   return (
@@ -32,8 +45,8 @@ const Login: React.FC = () => {
         <TextField
           label='Username'
           type='text'
-          value={credentials.username}
-          name='username'
+          value={credentials.email}
+          name='email'
           fullWidth
           onChange={onChange}
           classNames='mt-2'

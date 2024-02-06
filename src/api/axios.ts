@@ -1,52 +1,90 @@
 import axios from 'axios'
-import { LoginCredentials, SignUpCredentials } from '../helpers'
+import { LoginCredentials, SignUpCredentials, Post } from '../helpers'
 
 const instance = axios.create({
   baseURL: 'https://mg-blogs-backend.onrender.com'
 })
 
-export const signup = async (token: string, data: SignUpCredentials) => {
+// const local_token = 'asdsadq2eqw'
+
+export const signup = async (data: SignUpCredentials) => {
   try {
+    console.log(data)
+
     //implement password encryption here
     const encrypted_password = data.password
 
     const res = await instance({
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        'Content-Type': 'application/json'
       },
       url: '/users',
       data: {
-        name: data.fullname,
-        username: data.username,
-        email: data.email,
-        encrypted_password
+        user: {
+          name: data.fullname,
+          username: data.username,
+          email: data.email,
+          password: encrypted_password
+        }
       }
     })
 
-    return res
+    localStorage.setItem('Authorization', res.headers.authorization)
+
+    return { message: res.data.status.message }
   } catch (error) {
     console.log(error)
+    return { message: 'Unable to Sign up' }
   }
 }
 
-export const signin = async (token: string, data: LoginCredentials) => {
+export const signin = async (data: LoginCredentials) => {
   try {
     const res = await instance({
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        'Content-Type': 'application/json'
       },
       url: '/users/sign_in',
       data: {
-        username: data.username,
-        password: data.password
+        user: {
+          email: data.email,
+          password: data.password
+        }
       }
     })
 
-    return res
+    localStorage.setItem('authorization', res.headers.authorization)
+    localStorage.setItem('user', JSON.stringify(res.data.status.data))
+
+    return res.data.status
+  } catch (error) {
+    console.log(error)
+    return { code: 404 }
+  }
+}
+
+export const createPost = async (data: { title: string; body: string }) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    const res = await instance({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: '/api/posts',
+      data: {
+        title: data.title,
+        body: data.body
+      }
+    })
+
+    console.log(res)
   } catch (error) {
     console.log(error)
   }

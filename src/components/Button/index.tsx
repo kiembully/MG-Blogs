@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react'
 import cn from 'classnames'
 
 type Props = {
+  type?: 'button' | 'submit' | 'reset'
   children: ReactNode
   variant?: 'default' | 'ghost' | 'outlined'
   size?: 'sm' | 'md' | 'lg'
@@ -12,6 +13,7 @@ type Props = {
 }
 
 const Button: FC<Props> = ({
+  type = 'button',
   children,
   variant = 'default',
   size = 'md',
@@ -36,7 +38,7 @@ const Button: FC<Props> = ({
 
   return (
     <button
-      type='button'
+      type={type}
       className={cn(
         `cursor-pointer text-${size}`,
         renderButtonStyle(variant),

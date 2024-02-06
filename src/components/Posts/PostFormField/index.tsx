@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import TextField from '../../TextField'
 import Button from '../../Button'
+import { createPost } from '../../../api'
 
 type Tag = {
   name: string
@@ -44,8 +45,16 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     })
   }
 
+  const createPostHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const res = await createPost({
+      title: newPost.title,
+      body: newPost.bodyText
+    })
+  }
+
   return (
-    <div className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen'>
+    <form className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen' onSubmit={createPostHandler}>
       <div className='flex'>
         <h1 className='flex-auto'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
         <p>
@@ -90,13 +99,15 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
           </div>
         </div>
         <div className='flex flex-row-reverse gap-2'>
-          <Button classNames='mt-6'>{variant === 'create' ? 'Post' : 'Update'}</Button>
+          <Button type='submit' classNames='mt-6'>
+            {variant === 'create' ? 'Post' : 'Update'}
+          </Button>
           <Button classNames='mt-6' variant='outlined'>
             Save as Draft
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
 
