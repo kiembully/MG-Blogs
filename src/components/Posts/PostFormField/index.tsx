@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import TextField from '../../textfield'
-import Button from '../../button'
+import TextField from '../../TextField'
+import Button from '../../Button'
 
 type Tag = {
   name: string

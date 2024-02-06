@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TextArea from '../../textarea'
-import Button from '../../button'
+import Button from '../../Button'
 import CommonDivider from '../../CommonDivider'
 
 type CommentProps = {
