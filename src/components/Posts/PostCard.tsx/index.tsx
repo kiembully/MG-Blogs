@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import Button from '../../Button'
 import { useNavigate } from 'react-router-dom'
 import Interaction from '../Interaction'
+import Conversation from '../Conversation'
 
 type Props = {
   viewMode?: boolean
@@ -15,6 +16,7 @@ const PostCard: FC<Props> = ({ viewMode }) => {
       className={`flex w-full min-h-72 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse'}`}
       // onClick={() => navigate('/post/1/view-post')}
     >
+      {viewMode && <Conversation />}
       {viewMode && <Interaction />}
       <div
         className={`flex min-h-full p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
