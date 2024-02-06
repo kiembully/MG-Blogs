@@ -15,7 +15,7 @@ const NavMenu: React.FC = () => {
           type='button'
           className='h-12 w-12 rounded-md bg-neutral-100 flex items-center justify-center lg:hidden'
         >
-          <img alt='search icon' src='./icons/search-icon.png' className='h-md' />
+          <img alt='search icon' src='/icons/search-icon.png' className='h-md' />
         </button>
         <button
           type='button'
@@ -58,12 +58,12 @@ const NavMenu: React.FC = () => {
     <div className='bg-white px-16'>
       <div className='flex gap-4 min-h-20 justify-center items-center w-full mx-auto max-w-[1440px] px-4 lg:px-8'>
         <div className='flex gap-2'>
-          <img height='24px' src='./icons/mg-logo.svg' alt='mg-logo' />
+          <img height='24px' src='/icons/mg-logo.svg' alt='mg-logo' />
           <span className='text-xl neutral-800'> Blogs</span>
         </div>
         <div className='flex flex-auto px-12 justify-center'>
           <div className='hidden items-center max-w-[600px] h-12 bg-neutral-100 w-full px-4 rounded-md flex lg:flex'>
-            <img alt='search icon' src='./icons/search-icon.png' className='h-md' />
+            <img alt='search icon' src='/icons/search-icon.png' className='h-md' />
             <input
               className='bg-[transparent] w-full outline-none px-3'
               type='text'
