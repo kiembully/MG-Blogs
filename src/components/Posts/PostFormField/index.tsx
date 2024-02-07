@@ -61,7 +61,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     const res = await createPost({
       title: newPost.title,
       body: newPost.bodyText,
-      tags: newPost.tags.filter((tag) => tag.selected).map((tag) => tag.name),
+      tags: newPost.tags.filter((tag) => tag).map((tag) => tag),
       comments: [],
       voteCounts: { downVotes: [], upVotes: [] }
     })

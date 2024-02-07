@@ -6,6 +6,5 @@ export const userData = () => {
 
 export const authorizationData = () => {
   const data = localStorage.getItem('authorization')
-  const parsedData = data ? JSON.parse(data) : null
-  return parsedData
+  return data
 }

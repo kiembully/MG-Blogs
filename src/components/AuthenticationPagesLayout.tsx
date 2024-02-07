@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { PageLayout } from './layouts'
 import { useNavigate } from 'react-router'
+import { userData, authorizationData } from '../hooks'
 
 type ChildrenProps = {
   children: JSX.Element | JSX.Element[]
@@ -11,8 +12,9 @@ const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: Childr
   // const restrictedClientRoute = ['/signin', '/login']
 
   useEffect(() => {
-    const data = localStorage.getItem('user')
-    if (data) {
+    const data = userData()
+    const auth = authorizationData()
+    if (data && auth) {
       navigate('/')
     }
   }, [])
