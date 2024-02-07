@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { Options, Languages, Footer } from './index'
 import Tags from '../Tags'
 import Button from '../Button'
