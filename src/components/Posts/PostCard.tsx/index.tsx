@@ -39,7 +39,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
         <div
           className={`flex items-center gap-1 ${viewMode ? 'flex-row w-full gap-2' : 'flex-col'}`}
         >
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ' mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-black ${viewMode && 'whitespace-nowrap'}`}>
               24 {viewMode && 'Comments'}
