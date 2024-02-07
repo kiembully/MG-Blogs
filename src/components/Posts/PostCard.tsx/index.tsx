@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Button from '../../Button'
 import { useNavigate } from 'react-router-dom'
 import Interaction from '../Interaction'
@@ -7,6 +7,10 @@ import type { Post } from '../../../helpers'
 import { userData } from '../../../hooks'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from 'dayjs'
+import Modal from '../../Modal'
+import { deletePost } from '../../../api'
+import CommonSpinner from '../../CommonSpinner'
+import Overlay from '../../Overlay/overlay'
 
 type Props = {
   viewMode?: boolean
@@ -16,6 +20,34 @@ type Props = {
 const PostCard: FC<Props> = ({ viewMode, post }) => {
   const navigate = useNavigate()
   dayjs.extend(relativeTime)
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [selectedPost, setSelectedPost] = useState<string | undefined>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [resMessage, setResMessage] = useState<string>('')
+  const handleSelectPost = (id: string | undefined) => {
+    setSelectedPost(id)
+    setIsOpen(true)
+  }
+
+  const handleDelete = async () => {
+    setLoading(true)
+    if (selectedPost) {
+      const res = await deletePost(selectedPost)
+
+      if (res === 200) {
+        setLoading(false)
+        setError(false)
+        setResMessage('Success!')
+        navigate('/')
+      } else {
+        setLoading(false)
+        setError(true)
+        setResMessage('Unable to delete post. try again!')
+      }
+    }
+  }
 
   return (
     <div
@@ -59,7 +91,11 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
                 <img alt='up vote icon' src='/icons/write-icon.svg' />
                 {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}
               </Button>
-              <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
+              <Button
+                variant='ghost'
+                classNames={viewMode ? 'flex gap-1' : ''}
+                onClick={() => handleSelectPost(post?.id)}
+              >
                 <img alt='up vote icon' src='/icons/delete-icon.svg' />
                 {viewMode && <p className='whitespace-nowrap text-black'>Delete</p>}
               </Button>
@@ -111,6 +147,27 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </div>
         </div>
       </div>
+      <Modal title='Confirmation' isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
+        <div className='p-8 border-t border-neutral-200'>
+          {loading ? (
+            <Overlay>
+              <CommonSpinner />
+            </Overlay>
+          ) : (
+            <></>
+          )}
+          <p>Do you confirm to delete this post? Tap yes, if you really want to delete it.</p>
+          <p className={`text-left text-xs flex-1 mt-6 ${error && 'text-[red]'}`}>{resMessage}</p>
+        </div>
+        <div className='flex items-center flex-row-reverse gap-2 py-4 px-8 border-t border-neutral-200'>
+          <Button type='button' size='sm' onClick={handleDelete}>
+            Yes, I confirm
+          </Button>
+          <Button type='button' size='sm' variant='outlined' onClick={() => setIsOpen(false)}>
+            Edi don&apos;t!
+          </Button>
+        </div>
+      </Modal>
     </div>
   )
 }

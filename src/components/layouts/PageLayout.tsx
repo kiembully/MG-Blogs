@@ -47,11 +47,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({ is404, children }: PageLayoutPr
 
   return (
     <div>
-      <Modal isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
-        <div className='flex flex-col items-center justify-center'>
-          <h1 className='text-xl mb-6'>Token is expired! Please logout.</h1>
+      <Modal title='Confirmation' isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
+        <div className='flex flex-col items-center justify-center p-8'>
+          <h1 className='text-xl mb-6'>Token has expired! You will be logout.</h1>
           <Button variant='default' onClick={() => logoutUser()}>
-            Logout
+            Okay
           </Button>
         </div>
       </Modal>
