@@ -57,7 +57,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
       onClick={() => navigate(`/post/${post?.id}/view-post`)}
     >
       {viewMode && <Conversation />}
-      {viewMode && <Interaction />}
+      {viewMode && post && <Interaction post={post} />}
       <div
         className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
       >
