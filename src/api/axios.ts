@@ -199,3 +199,24 @@ export const getCommentByID = async (post_id: string, comment_id: string) => {
     console.log(error)
   }
 }
+
+export const deletePost = async (id: string) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    const res = await instance({
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: `/api/posts/${id}`
+    })
+
+    return res.status
+  } catch (error) {
+    console.log(error)
+  }
+}

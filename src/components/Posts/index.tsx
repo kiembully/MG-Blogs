@@ -41,7 +41,6 @@ const Post = ({ variant }: { variant: string }) => {
         posts.map((post, index) => <PostCard key={`${post.title}${index}`} post={post} />)
       ) : (
         <EmptyPost />
-        // <Empty />
       )}
     </div>
   )
