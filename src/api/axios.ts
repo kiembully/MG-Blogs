@@ -100,14 +100,40 @@ export const createPost = async (data: Post) => {
   }
 }
 
+export const updatePost = async (data: Post) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    const res = await instance({
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: `/api/posts/${data.id}`,
+      data: {
+        title: data.title,
+        body: data.body,
+        tags: data.tags,
+        comments: data.comments,
+        voteCounts: data.voteCounts
+      }
+    })
+
+    return res.status
+  } catch (error) {
+    return { code: 404 }
+  }
+}
+
 export const getAllPosts = async () => {
   try {
     const res = await instance({
       method: 'GET',
       url: '/api/posts'
     })
-
-    console.log(res.data.data)
 
     const data = res.data.data.map((item: any) => item.attributes) || []
 
