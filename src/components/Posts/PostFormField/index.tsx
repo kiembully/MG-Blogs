@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TextField from '../../TextField'
 import Button from '../../Button'
-import { createPost, getPostByID } from '../../../api'
+import { createPost, getPostByID, updatePost } from '../../../api'
 import Overlay from '../../Overlay/overlay'
 import CommonSpinner from '../../CommonSpinner'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -61,9 +61,10 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     const res = await createPost({
       title: newPost.title,
       body: newPost.bodyText,
-      tags: newPost.tags.filter((tag) => tag.selected).map((tag) => tag.name),
+      tags: newPost.tags,
       comments: [],
-      voteCounts: { downVotes: [], upVotes: [] }
+      voteCounts: { downVotes: [], upVotes: [] },
+      id: ''
     })
 
     if (res === 200) {
@@ -76,20 +77,51 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       setError(true)
       setResMessage('Unable to create post. try again!')
     }
+  }
 
-    console.log(res)
+  const updatePostHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!newPost.title || !newPost.bodyText) {
+      setError(true)
+      setResMessage('Title and Body text cannot be empty')
+      return
+    }
+
+    const postId = params['post-id']
+
+    setLoading(true)
+    const res = await updatePost({
+      title: newPost.title,
+      body: newPost.bodyText,
+      tags: newPost.tags,
+      comments: [],
+      voteCounts: { downVotes: [], upVotes: [] },
+      id: postId || ''
+    })
+
+    if (res === 200) {
+      setLoading(false)
+      setError(false)
+      setResMessage('Success!')
+      navigate('/')
+    } else {
+      setLoading(false)
+      setError(true)
+      setResMessage('Unable to update post. try again!')
+    }
   }
 
   const fetchPost = async (id: string) => {
+    setLoading(true)
     if (variant === 'update') {
       const res = await getPostByID(id)
-      console.log(res)
       const post: CreatePostTypes = {
         title: res?.data.data.attributes.title,
         bodyText: res?.data.data.attributes.body,
         tags: res?.data.data.attributes.tags
       }
       setNewPost(post)
+      setLoading(false)
     }
   }
 
@@ -102,7 +134,10 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
   }, [params['post-id']])
 
   return (
-    <form className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen' onSubmit={createPostHandler}>
+    <form
+      className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen'
+      onSubmit={variant === 'create' ? createPostHandler : updatePostHandler}
+    >
       <div className='flex'>
         <h1 className='flex-auto'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
         <p>
