@@ -26,6 +26,7 @@ const NavMenu: React.FC = () => {
         <button
           type='button'
           className='h-12 w-12 rounded-md bg-neutral-100 flex items-center justify-center'
+          onClick={() => navigate('/post/create-post')}
         >
           <img alt='add icon' src='/icons/add-icon.png' />
         </button>

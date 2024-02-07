@@ -21,7 +21,7 @@ const SideMenuContainer: FC<Props> = ({ variant, isUserActive }) => {
       {variant === 'feed' ? (
         <>
           {isUserActive && (
-            <Button onClick={() => navigate('/post/1/create-post')} fullWidth>
+            <Button onClick={() => navigate('/post/create-post')} fullWidth>
               Create Post
             </Button>
           )}
