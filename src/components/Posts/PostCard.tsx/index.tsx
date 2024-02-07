@@ -53,7 +53,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
 
   return (
     <div
-      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse'}`}
+      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse'}`}
       // onClick={() => navigate(`/post/${post?.id}/view-post`)}
     >
       {viewMode && <Conversation />}
@@ -71,7 +71,11 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
+          <Button
+            variant='ghost'
+            classNames={viewMode ? 'flex gap-1' : 'mt-8'}
+            onClick={() => navigate(`/post/${post?.id}/view-post`)}
+          >
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-black text-sm ${viewMode && 'whitespace-nowrap'}`}>
               {post?.comments?.length || 0} {viewMode && 'Comments'}
