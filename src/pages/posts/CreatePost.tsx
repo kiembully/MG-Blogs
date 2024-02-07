@@ -1,12 +1,14 @@
 import React from 'react'
-import { NavMenuLayout } from '../../components'
+import { NavMenuLayout, PageLayout } from '../../components'
 import PostFormField from '../../components/Posts/PostFormField'
 
 const CreatePost = () => {
   return (
-    <NavMenuLayout>
-      <PostFormField variant='create' />
-    </NavMenuLayout>
+    <PageLayout>
+      <NavMenuLayout>
+        <PostFormField variant='create' />
+      </NavMenuLayout>
+    </PageLayout>
   )
 }
 

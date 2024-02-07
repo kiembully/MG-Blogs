@@ -96,7 +96,7 @@ export const createPost = async (data: Post) => {
 
     return res.status
   } catch (error) {
-    return { code: 404 }
+    return 500
   }
 }
 
