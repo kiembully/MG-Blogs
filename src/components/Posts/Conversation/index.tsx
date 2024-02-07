@@ -25,6 +25,7 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
 
   const handleReply = async () => {
     if (!props.id) return
+    if (!userData()) return
     // Implement logic to handle adding a reply
     // console.log(`Replying to comment ${id} with text: ${replyText}`)
     const res = await addReply(props.id, { sender_name: userData().username, message: replyText, voteCounts: { upVotes: [], downVotes: [] } })
@@ -87,7 +88,8 @@ const SampleConvo: React.FC = () => {
   const getAllComments = async () => {
     if (!post_id) return
     const res = await getCommentsByPost(post_id)
-    setComments(res)
+    const sortedComments: Comment[] = res.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    setComments(sortedComments)
   }
 
   useEffect(() => {

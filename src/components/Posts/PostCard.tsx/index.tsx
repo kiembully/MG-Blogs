@@ -11,6 +11,7 @@ import Modal from '../../Modal'
 import { deletePost } from '../../../api'
 import CommonSpinner from '../../CommonSpinner'
 import Overlay from '../../Overlay/overlay'
+import { FacebookShareButton } from 'react-share'
 
 type Props = {
   viewMode?: boolean
@@ -49,8 +50,22 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
     }
   }
 
+  const handleFacebookShare = (id: string | undefined) => {
+    const postUrl = `https://mg-blogs.netlify.app/post/${id}/view-post`
+    const quote = ''
+    const screenWidth = window.screen.width
+    const screenHeight = window.screen.height
+    const left = (screenWidth - 626) / 2
+    const top = (screenHeight - 436) / 2
+    const windowOptions = `width=${626},height=${436},left=${left},top=${top}`
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}&quote=${encodeURIComponent(quote)}`
+    const name = 'facebook-share-dialog'
+
+    window.open(url, name, windowOptions)
+  }
+
   return (
-    <div className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg relative overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse  pb-8'}`} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
+    <div className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg relative overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse relative pb-8'}`} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
       {viewMode && <Conversation />}
       {viewMode && post && <Interaction post={post} />}
       <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>

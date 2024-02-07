@@ -40,13 +40,12 @@ const Interaction = ({ post }: InterfactionProps) => {
         sender_name: post.user.name
       })
 
-      console.log(res)
       if (res?.data?.data) {
         setLoading(false)
         setError(false)
         setResMessage('')
         setNewPost((prevState) => ({ ...prevState, comment: '' }))
-        // navigate('/')
+        window.location.reload()
       } else {
         setLoading(false)
         setError(true)
@@ -63,17 +62,7 @@ const Interaction = ({ post }: InterfactionProps) => {
   return (
     <div className='flex flex-col w-full min-h-full p-4'>
       <div className='w-full'>
-        <TextArea
-          rows={6}
-          resize={false}
-          fullWidth
-          label='Comment'
-          value={newPost.comment}
-          name='comment'
-          placeholder='Write a comment...'
-          classNames='mt-2 w-auto'
-          onChange={onChange}
-        />
+        <TextArea rows={6} resize={false} fullWidth label='Comment' value={newPost.comment} name='comment' placeholder='Write a comment...' classNames='mt-2 w-auto' onChange={onChange} />
       </div>
       <p className={`text-center text-xs ${error && 'text-[red]'}`}>{resMessage}</p>
       <div className='w-full flex flex-row-reverse mb-8'>
