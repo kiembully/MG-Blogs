@@ -169,7 +169,8 @@ export const getPostsByUserID = async (id: string) => {
       url: `/api/users/${id}/posts`
     })
 
-    return res.data.data
+    const data = res.data.data.map((item: any) => item.attributes) || []
+    return data
   } catch (error) {
     console.log(error)
   }

@@ -39,7 +39,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
         <div
           className={`flex items-center gap-1 ${viewMode ? 'flex-row w-full gap-2' : 'flex-col'}`}
         >
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ' mt-8'}>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-black ${viewMode && 'whitespace-nowrap'}`}>
               24 {viewMode && 'Comments'}
@@ -99,14 +99,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
 
           <div className='w-full flex flex-col gap-4 overflow-hidden rounded-md'>
             <p className=' mb-2'>{post?.body}</p>
-            <div
-              className='min-h-48 w-full overflow-hidden rounded-md bg-neutral-100'
-              style={{
-                backgroundImage: 'url(/assets/post-sample-upload.png)',
-                backgroundSize: 'cover'
-              }}
-            ></div>
-            {/* {post?.image && (
+            {post?.image && (
               <div
                 className='min-h-48 w-full overflow-hidden rounded-md bg-neutral-100'
                 style={{
@@ -114,7 +107,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
                   backgroundSize: 'cover'
                 }}
               ></div>
-            )} */}
+            )}
           </div>
         </div>
       </div>

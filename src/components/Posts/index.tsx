@@ -30,7 +30,7 @@ const Post = ({ variant }: { variant: string }) => {
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [params])
 
   return (
     <div>
