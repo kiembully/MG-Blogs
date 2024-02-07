@@ -64,7 +64,10 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     setLoading(true)
     const res = await createPost({
       title: newPost.title,
-      body: newPost.bodyText
+      body: newPost.bodyText,
+      tags: newPost.tags.filter((tag) => tag.selected).map((tag) => tag.name),
+      comments: [],
+      voteCounts: { downVotes: [], upVotes: [] }
     })
 
     if (res === 200) {
@@ -77,6 +80,8 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       setError(true)
       setResMessage('Unable to create post. try again!')
     }
+
+    console.log(res)
   }
 
   return (

@@ -72,7 +72,7 @@ export const signin = async (data: LoginCredentials) => {
   }
 }
 
-export const createPost = async (data: { title: string; body: string }) => {
+export const createPost = async (data: Post) => {
   try {
     const token = localStorage.getItem('authorization')
 
@@ -87,7 +87,10 @@ export const createPost = async (data: { title: string; body: string }) => {
       url: '/api/posts',
       data: {
         title: data.title,
-        body: data.body
+        body: data.body,
+        tags: data.tags,
+        comments: data.comments,
+        voteCounts: data.voteCounts
       }
     })
 
@@ -103,6 +106,8 @@ export const getAllPosts = async () => {
       method: 'GET',
       url: '/api/posts'
     })
+
+    console.log(res.data.data)
 
     const data = res.data.data.map((item: any) => item.attributes) || []
 
