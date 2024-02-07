@@ -25,9 +25,9 @@ const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: Childr
         <img
           src='/assets/mg-background.png'
           alt='mg-background'
-          className='relative h-full w-1/2 aspect-auto'
+          className='relative h-full w-1/2 aspect-auto hidden md:flex'
         />
-        <div className='relative h-full w-1/2 bg-white flex flex-col items-center justify-center'>
+        <div className='relative h-full w-full md:w-1/2 bg-white flex flex-col items-center justify-center py-4 md:py-8'>
           {children}
         </div>
       </div>

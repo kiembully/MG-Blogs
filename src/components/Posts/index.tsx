@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PostCard from './PostCard.tsx'
-import { Post as PostTypes } from '../../helpers/interfaces.js'
+import { PostData, Post as PostTypes } from '../../helpers/interfaces.js'
 import { getAllPosts, getPostsByUserID } from '../../api'
 import { useParams } from 'react-router'
 import EmptyPost from './EmptyPost'
@@ -14,7 +14,11 @@ const Post = ({ variant }: { variant: string }) => {
     setLoading(true)
     if (variant === 'all') {
       const res: PostTypes[] = await getAllPosts()
-      setPosts(res)
+      const sortedArray: PostTypes[] = res.sort(
+        (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+
+      setPosts(sortedArray)
       setLoading(false)
     }
 
@@ -22,7 +26,10 @@ const Post = ({ variant }: { variant: string }) => {
       const userId = params['user_id']
       if (userId) {
         const res: PostTypes[] = await getPostsByUserID(userId)
-        setPosts(res)
+        const sortedArray: PostTypes[] = res.sort(
+          (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        setPosts(sortedArray)
         setLoading(false)
       }
     }

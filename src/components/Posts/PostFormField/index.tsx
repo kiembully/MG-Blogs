@@ -114,10 +114,11 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     setLoading(true)
     if (variant === 'update') {
       const res = await getPostByID(id)
+      console.log(res)
       const post: CreatePostTypes = {
-        title: res?.data.data.attributes.title,
-        bodyText: res?.data.data.attributes.body,
-        tags: res?.data.data.attributes.tags
+        title: res?.title,
+        bodyText: res?.body,
+        tags: res?.tags
       }
       setNewPost(post)
       setLoading(false)
@@ -134,73 +135,71 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
 
   return (
     <form
-      className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen'
+      className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen mt-20'
       onSubmit={variant === 'create' ? createPostHandler : updatePostHandler}
     >
-      <div className='flex'>
-        <h1 className='flex-auto'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
-        <p>
-          Draft <span>12</span>
+      <div className='flex mb-4'>
+        <h1 className='flex-auto text-25 font-bold leading-25 tracking-semibold'>
+          {variant === 'create' ? 'Create Post' : 'Edit Post'}
+        </h1>
+        <p className='text-16 font-medium leading-16 tracking-normal text-indigo-500'>
+          Draft <span className='p-1 bg-[#312E81] text-white text-xs rounded-sm'>12</span>
         </p>
       </div>
-      <div className='overflow-hidden relative p-4 rounded-md bg-white'>
-        {loading && (
-          <Overlay>
-            <CommonSpinner />
-          </Overlay>
-        )}
-        <TextField
-          label='Title'
-          type='text'
-          value={newPost.title}
-          name='title'
-          fullWidth
-          onChange={onChange}
-          classNames='mt-2 w-auto'
-          disabled={loading}
-        />
-        <TextField
-          label='Body text'
-          type='text'
-          value={newPost.bodyText}
-          name='bodyText'
-          fullWidth
-          onChange={onChange}
-          classNames='mt-2 w-auto'
-          disabled={loading}
-        />
-        <div>
-          <p>Tags</p>
-          <div className='flex flex-wrap gap-2'>
-            {allTags.map((tag) => {
-              return (
-                <div
-                  className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${
-                    newPost.tags.includes(tag) && 'text-primary-500 border-primary-500'
-                  }`}
-                  key={tag}
-                >
+      <div className='overflow-hidden relative rounded-md bg-white border border-solid border-neutral-200'>
+        <div className='p-6 flex flex-col gap-4'>
+          {loading && (
+            <Overlay>
+              <CommonSpinner />
+            </Overlay>
+          )}
+          <TextField
+            label='Title'
+            type='text'
+            value={newPost.title}
+            name='title'
+            fullWidth
+            onChange={onChange}
+            classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal'
+            disabled={loading}
+          />
+          <TextField
+            label='Body text'
+            type='text'
+            value={newPost.bodyText}
+            name='bodyText'
+            fullWidth
+            onChange={onChange}
+            classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal'
+            disabled={loading}
+          />
+          <div>
+            <p className='text-base font-medium leading-16 tracking-normal mb-2'>Tags</p>
+            <div className='flex flex-wrap gap-2'>
+              {allTags.map((tag) => {
+                return (
                   <button
+                    className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${
+                      newPost.tags.includes(tag) && 'text-primary-500 border-primary-500'
+                    }`}
+                    key={tag}
                     type='button'
-                    className='bg-[transparent]'
                     onClick={() => handleTagClick(tag)}
                   >
-                    {newPost.tags.includes(tag) ? '-' : '+'}
+                    <div>{newPost.tags.includes(tag) ? '-' : '+'}</div>
+                    {tag}
                   </button>
-                  {tag}
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
         </div>
-        <div className='flex items-center flex-row-reverse gap-2'>
-          <Button type='submit' classNames='mt-6'>
-            {variant === 'create' ? 'Post' : 'Update'}
-          </Button>
-          <Button type='button' classNames='mt-6' variant='outlined'>
+        <div className='flex items-center flex-row-reverse gap-2 p-6 bg-neutral-100'>
+          <Button type='submit'>{variant === 'create' ? 'Post' : 'Update'}</Button>
+          <Button type='button' variant='outlined'>
             Save as Draft
           </Button>
-          <p className={`text-left text-xs flex-1 mt-6 ${error && 'text-[red]'}`}>{resMessage}</p>
+          <p className={`text-left text-xs flex-1 ${error && 'text-[red]'}`}>{resMessage}</p>
         </div>
       </div>
     </form>
