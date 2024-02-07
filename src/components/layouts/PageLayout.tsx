@@ -3,7 +3,7 @@ import Modal from '../Modal'
 import Button from '../Button'
 import { checkTokenExpiration } from '../../helpers/auth'
 import { useNavigate } from 'react-router-dom'
-import { userData, authorizationData } from '../../hooks'
+import { authorizationData } from '../../hooks'
 
 type PageLayoutProps = {
   is404?: boolean
@@ -19,17 +19,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({ is404, children }: PageLayoutPr
   const [isOpen, setIsOpen] = useState<boolean>(false)
   useEffect(() => {
     const auth = authorizationData()
-    const user = userData()
-
-    if (auth && user) {
-      if (auth) {
-        if (checkTokenExpiration(auth)) {
-          setIsOpen(true)
-        }
-      }
-    } else {
-      navigate('/login')
-    }
 
     if (auth) {
       if (checkTokenExpiration(auth)) {

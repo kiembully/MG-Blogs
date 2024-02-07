@@ -9,8 +9,6 @@ const instance = axios.create({
 
 export const signup = async (data: SignUpCredentials) => {
   try {
-    console.log(data)
-
     //implement password encryption here
     const encrypted_password = data.password
 
@@ -153,7 +151,7 @@ export const getPostByID = async (id: string) => {
       url: `/api/posts/${id}`
     })
 
-    return res
+    return res.data.data.attributes
   } catch (error) {
     console.log(error)
   }
