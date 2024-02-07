@@ -192,9 +192,6 @@ export const addComment = async (post_id: string, data: Comment) => {
 
     if (!token) return { message: 'Unauthorized' }
 
-    console.log(post_id)
-    console.log(data)
-
     const res = await instance({
       method: 'POST',
       headers: {
