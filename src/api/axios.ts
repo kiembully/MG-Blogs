@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LoginCredentials, SignUpCredentials, Post } from '../helpers'
+import { LoginCredentials, SignUpCredentials, Post, Comment } from '../helpers'
 
 const instance = axios.create({
   baseURL: 'https://mg-blogs-backend.onrender.com'
@@ -181,6 +181,50 @@ export const getAllComments = async (post_id: string) => {
       url: `/api/posts/${post_id}/comments`
     })
     return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const addComment = async (post_id: string, data: Comment) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    console.log(post_id)
+    console.log(data)
+
+    const res = await instance({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: `/api/posts/${post_id}/comments`,
+      data: {
+        message: data.message,
+        voteCounts: data.voteCounts
+      }
+    })
+
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getCommentsByPost = async (post_id: string) => {
+  try {
+    const res = await instance({
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: `/api/posts/${post_id}/comments`
+    })
+
+    console.log(res)
   } catch (error) {
     console.log(error)
   }

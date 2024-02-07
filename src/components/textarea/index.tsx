@@ -12,6 +12,7 @@ type Props = {
   resize?: boolean
   fullWidth?: boolean
   classNames?: string
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 const TextArea: FC<Props> = ({
@@ -22,7 +23,8 @@ const TextArea: FC<Props> = ({
   name,
   fullWidth,
   resize,
-  classNames
+  classNames,
+  onChange
 }) => {
   return (
     <div className={classNames}>
@@ -40,6 +42,7 @@ const TextArea: FC<Props> = ({
         )}
         rows={rows}
         placeholder={placeholder}
+        onChange={onChange}
       />
     </div>
   )
