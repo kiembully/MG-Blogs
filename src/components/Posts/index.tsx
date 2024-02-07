@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PostCard from './PostCard.tsx'
-import { PostData, Post as PostTypes } from '../../helpers/interfaces.js'
+import { Post as PostTypes } from '../../helpers/interfaces.js'
 import { getAllPosts, getPostsByUserID } from '../../api'
 import { useParams } from 'react-router'
 import EmptyPost from './EmptyPost'
