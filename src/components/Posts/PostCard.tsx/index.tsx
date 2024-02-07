@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Interaction from '../Interaction'
 import Conversation from '../Conversation'
 import type { Post } from '../../../helpers'
+import { userData } from '../../../hooks'
 
 type Props = {
   viewMode?: boolean
@@ -45,18 +46,22 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
             <img alt='up vote icon' src='/icons/share-icon.svg' />
             {viewMode && <p className='whitespace-nowrap text-black'>Share</p>}
           </Button>
-          <Button
-            variant='ghost'
-            classNames={viewMode ? 'flex gap-1' : ''}
-            onClick={() => navigate(`/post/${post?.id}/edit-post`)}
-          >
-            <img alt='up vote icon' src='/icons/write-icon.svg' />
-            {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}
-          </Button>
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
-            <img alt='up vote icon' src='/icons/delete-icon.svg' />
-            {viewMode && <p className='whitespace-nowrap text-black'>Delete</p>}
-          </Button>
+          {userData().id === post?.user?.id && (
+            <>
+              <Button
+                variant='ghost'
+                classNames={viewMode ? 'flex gap-1' : ''}
+                onClick={() => navigate(`/post/${post?.id}/edit-post`)}
+              >
+                <img alt='up vote icon' src='/icons/write-icon.svg' />
+                {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}
+              </Button>
+              <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
+                <img alt='up vote icon' src='/icons/delete-icon.svg' />
+                {viewMode && <p className='whitespace-nowrap text-black'>Delete</p>}
+              </Button>
+            </>
+          )}
         </div>
       </div>
       <div className='w-full p-4'>
@@ -71,7 +76,19 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
               <p>{post?.formattedCreatedAt}</p>
             </div>
           </div>
-          <p className='text-gray-500 text-sm'>@design-talks</p>
+          <div className='relative flex flex-row gap-2'>
+            {post?.tags.length ? (
+              post?.tags.map((tag, index) => {
+                return (
+                  <p className='text-gray-500 text-sm' key={`${tag}${index}`}>
+                    {tag}
+                  </p>
+                )
+              })
+            ) : (
+              <p className='text-gray-500 text-sm'>No tags</p>
+            )}
+          </div>
         </div>
 
         <div>

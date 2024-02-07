@@ -29,6 +29,10 @@ export interface Post {
   comments: Comment[]
   formattedCreatedAt?: string
   id?: number
+  user?: {
+    id: number
+    name: string
+  }
 }
 
 export interface Tags {
