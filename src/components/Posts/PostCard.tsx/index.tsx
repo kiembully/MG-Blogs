@@ -18,8 +18,6 @@ type Props = {
 }
 
 const PostCard: FC<Props> = ({ viewMode, post }) => {
-  console.log(post)
-
   const navigate = useNavigate()
   dayjs.extend(relativeTime)
 

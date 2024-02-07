@@ -7,10 +7,8 @@ export const checkTokenExpiration = (token: string) => {
       const decodedToken: any = jwtDecode(token)
       const isTokenExpired = decodedToken.exp < Date.now() / 1000
       if (isTokenExpired) {
-        console.log('Token is expired. Log out the user.')
         return true
       } else {
-        console.log('Token is valid.')
         return false
       }
     } catch (error) {
