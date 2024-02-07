@@ -40,13 +40,12 @@ const Interaction = ({ post }: InterfactionProps) => {
         sender_name: post.user.name
       })
 
-      console.log(res)
       if (res?.data?.data) {
         setLoading(false)
         setError(false)
         setResMessage('')
         setNewPost((prevState) => ({ ...prevState, comment: '' }))
-        // navigate('/')
+        window.location.reload()
       } else {
         setLoading(false)
         setError(true)
