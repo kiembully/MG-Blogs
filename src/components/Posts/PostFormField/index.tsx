@@ -1,39 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '../../TextField'
 import Button from '../../Button'
-import { createPost } from '../../../api'
+import { createPost, getPostByID } from '../../../api'
 import Overlay from '../../Overlay/overlay'
 import CommonSpinner from '../../CommonSpinner'
-import { useNavigate } from 'react-router-dom'
-
-type Tag = {
-  name: string
-  selected: boolean
-}
+import { useNavigate, useParams } from 'react-router-dom'
 
 type CreatePostTypes = {
   title: string
   bodyText: string
-  tags: Tag[]
+  tags: string[]
 }
 
 type PostFormFieldProps = {
   variant: string
 }
 
+const allTags = ['@design-talks', '@react', '@ruby', '@case-studies', '@tech-stack', '@bootcamp']
+
 const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
   const navigate = useNavigate()
   const [newPost, setNewPost] = useState<CreatePostTypes>({
     title: '',
     bodyText: '',
-    tags: [
-      { name: '@react', selected: false },
-      { name: '@ruby', selected: false },
-      { name: '@tech-stack', selected: false },
-      { name: '@case-studies', selected: false },
-      { name: '@bootcamp', selected: true },
-      { name: '@design-talks', selected: true }
-    ]
+    tags: []
   })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,10 +31,16 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     setNewPost((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  const handleTagClick = (index: number) => {
+  const handleTagClick = (clickedTag: string) => {
     setNewPost((prevState) => {
       const updatedTags = [...prevState.tags]
-      updatedTags[index] = { ...updatedTags[index], selected: !updatedTags[index].selected }
+      const index = updatedTags.indexOf(clickedTag)
+
+      if (index !== -1) {
+        updatedTags.splice(index, 1)
+      } else {
+        updatedTags.push(clickedTag)
+      }
       return { ...prevState, tags: updatedTags }
     })
   }
@@ -78,6 +74,27 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       setResMessage('Unable to create post. try again!')
     }
   }
+
+  const fetchPost = async (id: string) => {
+    if (variant === 'update') {
+      const res = await getPostByID(id)
+      console.log(res)
+      const post: CreatePostTypes = {
+        title: res?.data.data.attributes.title,
+        bodyText: res?.data.data.attributes.body,
+        tags: res?.data.data.attributes.tags
+      }
+      setNewPost(post)
+    }
+  }
+
+  const params = useParams()
+  useEffect(() => {
+    const postId = params['post-id']
+    if (postId) {
+      fetchPost(postId)
+    }
+  }, [params['post-id']])
 
   return (
     <form className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen' onSubmit={createPostHandler}>
@@ -116,23 +133,25 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
         <div>
           <p>Tags</p>
           <div className='flex flex-wrap gap-2'>
-            {newPost.tags.map((tag, index) => (
-              <div
-                className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${
-                  tag.selected && 'text-primary-500 border-primary-500'
-                }`}
-                key={tag.name}
-              >
-                <button
-                  type='button'
-                  className='bg-[transparent]'
-                  onClick={() => handleTagClick(index)}
+            {allTags.map((tag) => {
+              return (
+                <div
+                  className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${
+                    newPost.tags.includes(tag) && 'text-primary-500 border-primary-500'
+                  }`}
+                  key={tag}
                 >
-                  {tag.selected ? '-' : '+'}
-                </button>
-                {tag.name}
-              </div>
-            ))}
+                  <button
+                    type='button'
+                    className='bg-[transparent]'
+                    onClick={() => handleTagClick(tag)}
+                  >
+                    {newPost.tags.includes(tag) ? '-' : '+'}
+                  </button>
+                  {tag}
+                </div>
+              )
+            })}
           </div>
         </div>
         <div className='flex items-center flex-row-reverse gap-2'>
