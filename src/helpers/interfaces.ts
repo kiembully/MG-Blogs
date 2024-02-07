@@ -48,6 +48,10 @@ export interface Comment {
   updatedAt?: string //this is date and time
   voteCounts: VoteCount
   replies?: Comment[]
+  user?: {
+    id: number
+    name: string
+  }
 }
 
 export interface VoteCount {

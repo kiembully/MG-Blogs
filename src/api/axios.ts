@@ -205,6 +205,8 @@ export const addComment = async (post_id: string, data: Comment) => {
       }
     })
 
+    await getCommentsByPost(post_id)
+
     return res
   } catch (error) {
     console.log(error)
@@ -220,8 +222,8 @@ export const getCommentsByPost = async (post_id: string) => {
       },
       url: `/api/posts/${post_id}/comments`
     })
-
-    console.log(res)
+    const data = res.data.data.map((item: any) => item.attributes) || []
+    return data
   } catch (error) {
     console.log(error)
   }
