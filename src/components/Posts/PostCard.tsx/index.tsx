@@ -48,7 +48,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           <Button
             variant='ghost'
             classNames={viewMode ? 'flex gap-1' : ''}
-            onClick={() => navigate('/post/1/edit-post')}
+            onClick={() => navigate(`/post/${post?.id}/edit-post`)}
           >
             <img alt='up vote icon' src='/icons/write-icon.svg' />
             {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}

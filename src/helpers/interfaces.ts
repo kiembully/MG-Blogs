@@ -28,6 +28,7 @@ export interface Post {
   image?: string | Blob
   comments: Comment[]
   formattedCreatedAt?: string
+  id: number
 }
 
 export interface Tags {
