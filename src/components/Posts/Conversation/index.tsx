@@ -31,7 +31,10 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
     <div className='flex flex-col w-full min-h-full px-4 py-2'>
       <div className='flex text-base font-medium leading-4 tracking-normal items-center'>
         <div className='size-[1.5rem] bg-neutral-100 rounded-full mr-2'></div>
-        {props.user?.name} <span className='text-sm font-normal text-neutral-400 leading-3 tracking-normal ml-2'>{dayjs(props.createdAt).fromNow()}</span>
+        {props.user?.name}{' '}
+        <span className='text-sm font-normal text-neutral-400 leading-3 tracking-normal ml-2'>
+          {dayjs(props.createdAt).fromNow()}
+        </span>
       </div>
       <div className='pl-8 pb-4 relative'>
         <div className='border-l-2 border-neutral-200 h-full absolute left-3 top-3'></div>
@@ -46,7 +49,9 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
               <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
             </Button>
           </div>
-          <button onClick={() => setShowReplies(!showReplies)}>{showReplies ? 'Hide Replies' : 'Show Replies'}</button>
+          <button onClick={() => setShowReplies(!showReplies)}>
+            {showReplies ? 'Hide Replies' : 'Show Replies'}
+          </button>
         </div>
       </div>
       {/* {showReplies &&
@@ -59,7 +64,12 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
           </div>
         ))} */}
       <div className='mt-[0.5rem]'>
-        <input type='text' placeholder='Reply...' value={replyText} onChange={(e) => setReplyText(e.target.value)} />
+        <input
+          type='text'
+          placeholder='Reply...'
+          value={replyText}
+          onChange={(e) => setReplyText(e.target.value)}
+        />
         <button onClick={handleReply}>Reply</button>
       </div>
     </div>

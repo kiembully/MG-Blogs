@@ -117,11 +117,14 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
               <p>{post && dayjs(post.createdAt).fromNow()}</p>
             </div>
           </div>
-          <div className='relative flex flex-row gap-2'>
+          <div className='relative flex flex-row gap-2 flex flex-wrap mt-2'>
             {post?.tags?.length ? (
               post?.tags.map((tag, index) => {
                 return (
-                  <p className='text-gray-500 text-sm' key={`${tag}${index}`}>
+                  <p
+                    className='text-gray-500 text-sm whitespace-nowrap leading-2'
+                    key={`${tag}${index}`}
+                  >
                     {tag}
                   </p>
                 )
