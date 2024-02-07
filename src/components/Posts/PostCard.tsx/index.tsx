@@ -18,6 +18,8 @@ type Props = {
 }
 
 const PostCard: FC<Props> = ({ viewMode, post }) => {
+  console.log(post)
+
   const navigate = useNavigate()
   dayjs.extend(relativeTime)
 
@@ -51,35 +53,33 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
 
   return (
     <div
-      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse'}`}
-      // onClick={() => navigate('/post/1/view-post')}
+      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse'}`}
+      onClick={() => navigate(`/post/${post?.id}/view-post`)}
     >
       {viewMode && <Conversation />}
       {viewMode && <Interaction />}
       <div
-        className={`flex min-h-full p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
+        className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
       >
         <div className={`flex items-center ${viewMode ? 'flex-row' : 'flex-col flex-1 '}`}>
           <Button variant='ghost'>
             <img alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
-          <p>1.1k</p>
+          <p className='text-sm'>1.1k</p>
           <Button variant='ghost'>
             <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
         </div>
-        <div
-          className={`flex items-center gap-1 ${viewMode ? 'flex-row w-full gap-2' : 'flex-col'}`}
-        >
+        <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
           <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
-            <p className={`text-black ${viewMode && 'whitespace-nowrap'}`}>
-              24 {viewMode && 'Comments'}
+            <p className={`text-black text-sm ${viewMode && 'whitespace-nowrap'}`}>
+              {post?.comments?.length || 0} {viewMode && 'Comments'}
             </p>
           </Button>
           <Button variant='ghost' classNames={viewMode ? 'flex flex-1 gap-1' : ''}>
             <img alt='up vote icon' src='/icons/share-icon.svg' />
-            {viewMode && <p className='whitespace-nowrap text-black'>Share</p>}
+            {viewMode && <p className='whitespace-nowrap my-auto text-sm text-black'>Share</p>}
           </Button>
           {userData().id === post?.user?.id && (
             <>
@@ -89,7 +89,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
                 onClick={() => navigate(`/post/${post?.id}/edit-post`)}
               >
                 <img alt='up vote icon' src='/icons/write-icon.svg' />
-                {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}
+                {viewMode && <p className='whitespace-nowrap text-black text-sm'>Edit</p>}
               </Button>
               <Button
                 variant='ghost'
@@ -97,7 +97,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
                 onClick={() => handleSelectPost(post?.id)}
               >
                 <img alt='up vote icon' src='/icons/delete-icon.svg' />
-                {viewMode && <p className='whitespace-nowrap text-black'>Delete</p>}
+                {viewMode && <p className='whitespace-nowrap text-black text-sm'>Delete</p>}
               </Button>
             </>
           )}
