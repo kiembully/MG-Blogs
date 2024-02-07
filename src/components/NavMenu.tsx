@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { User } from '../helpers'
 import { ProfileOptionModal } from './index'
+import { useNavigate } from 'react-router-dom'
 
 const NavMenu: React.FC = () => {
   const [user, setUser] = useState<User | null>()
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const data = localStorage.getItem('user')
