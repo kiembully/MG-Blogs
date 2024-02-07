@@ -27,8 +27,12 @@ export interface Post {
   voteCounts: VoteCount
   image?: string | Blob
   comments: Comment[]
-  formattedCreatedAt?: string
-  id: string
+  createdAt?: string
+  id?: string
+  user?: {
+    id: number
+    name: string
+  }
 }
 
 export interface Tags {

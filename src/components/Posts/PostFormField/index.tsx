@@ -63,8 +63,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       body: newPost.bodyText,
       tags: newPost.tags,
       comments: [],
-      voteCounts: { downVotes: [], upVotes: [] },
-      id: ''
+      voteCounts: { downVotes: [], upVotes: [] }
     })
 
     if (res === 200) {
