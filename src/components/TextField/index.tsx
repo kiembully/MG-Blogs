@@ -31,8 +31,11 @@ const TextField: FC<Props> = ({
 }) => {
   return (
     <div className={classNames}>
-      <p className='mb-2'>{label}</p>
+      <p aria-label='label' className='mb-2'>
+        {label}
+      </p>
       <input
+        aria-label='input-field'
         name={name}
         value={value}
         type={type}

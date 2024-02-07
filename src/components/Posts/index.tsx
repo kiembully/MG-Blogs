@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import PostCard from './PostCard.tsx'
 import { Post as PostTypes } from '../../helpers/interfaces.js'
-import { getAllPosts } from '../../api'
+import { getAllPosts, getPostsByUserID } from '../../api'
+import { useParams } from 'react-router'
+import EmptyPost from './EmptyPost'
 
 const Post = ({ variant }: { variant: string }) => {
   const [posts, setPosts] = useState<PostTypes[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const params = useParams()
 
   const fetchPosts = async () => {
+    setLoading(true)
     if (variant === 'all') {
       const res: PostTypes[] = await getAllPosts()
       setPosts(res)
+      setLoading(false)
+    }
+
+    if (variant === 'profile') {
+      const userId = params['user_id']
+      if (userId) {
+        const res: PostTypes[] = await getPostsByUserID(userId)
+        setPosts(res)
+        setLoading(false)
+      }
     }
   }
 
@@ -20,9 +35,14 @@ const Post = ({ variant }: { variant: string }) => {
   return (
     <div>
       <h2 className='mb-4 text-base font-medium leading-6 tracking-normal'>Recent Posts</h2>
-      {posts.map((post, index) => {
-        return <PostCard key={`${post.title}${index}`} post={post} />
-      })}
+      {loading ? (
+        <>Loading</>
+      ) : posts.length > 0 ? (
+        posts.map((post, index) => <PostCard key={`${post.title}${index}`} post={post} />)
+      ) : (
+        <EmptyPost />
+        // <Empty />
+      )}
     </div>
   )
 }
