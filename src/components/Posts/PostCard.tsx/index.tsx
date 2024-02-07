@@ -50,10 +50,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
   }
 
   return (
-    <div
-      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg relative overflow-hidden z-0 ${viewMode && 'flex-col-reverse'}`}
-      // onClick={() => navigate(`/post/${post?.id}/view-post`)}
-    >
+    <div className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg relative overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse'}`} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
       {viewMode && <Conversation />}
       {viewMode && post && <Interaction post={post} />}
       <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>
@@ -67,7 +64,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-black text-sm ${viewMode && 'whitespace-nowrap'}`}>
               {post?.comments?.length || 0} {viewMode && 'Comments'}
