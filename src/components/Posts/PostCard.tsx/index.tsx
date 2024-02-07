@@ -93,12 +93,6 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
   }
 
   return (
-<<<<<<< Updated upstream
-    <div className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg relative overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse relative pb-8'}`} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
-      {viewMode && <Conversation />}
-      {viewMode && post && <Interaction post={post} />}
-      <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>
-=======
     <div
       className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse relative'}`}
       ref={conversationRef}
@@ -106,34 +100,18 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
     >
       {viewMode && <Conversation />}
       {viewMode && userData() && post && <Interaction post={post} />}
-      <div
-        className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
-      >
->>>>>>> Stashed changes
+      <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>
         <div className={`flex items-center ${viewMode ? 'flex-row' : 'flex-col flex-1 '}`}>
           <Button variant='ghost' onClick={() => handleVote('upvote')}>
             <img alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
-<<<<<<< Updated upstream
           <p className='text-sm text-neutral-800'>{post?.voteCounts ? post.voteCounts.upVotes.length + post.voteCounts.downVotes.length : 0}</p>
-          <Button variant='ghost'>
-=======
-          <p className='text-sm'>1.1k</p>
           <Button variant='ghost' onClick={() => handleVote('downvote')}>
->>>>>>> Stashed changes
             <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-<<<<<<< Updated upstream
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
-=======
-          <Button
-            variant='ghost'
-            classNames={viewMode ? 'flex gap-1' : 'mt-8'}
-            onClick={() => handleConversation(post?.id)}
-          >
->>>>>>> Stashed changes
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'} onClick={() => handleConversation(post?.id)}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-neutral-800 text-sm ${viewMode && 'whitespace-nowrap'}`}>
               {post?.commentsCount} {viewMode && 'Comments'}
@@ -213,9 +191,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
                 <></>
               )}
               <p>Do you confirm to delete this post? Tap yes, if you really want to delete it.</p>
-              <p className={`text-left text-xs flex-1 mt-6 ${error && 'text-[red]'}`}>
-                {resMessage}
-              </p>
+              <p className={`text-left text-xs flex-1 mt-6 ${error && 'text-[red]'}`}>{resMessage}</p>
             </div>
             <div className='flex items-center flex-row-reverse gap-2 py-4 px-8 border-t border-neutral-200'>
               <Button type='button' size='sm' onClick={handleDelete}>

@@ -5,12 +5,8 @@ import { addReply, getCommentsByPost } from '../../../api'
 import { Comment } from '../../../helpers'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-<<<<<<< Updated upstream
-=======
-import Modal from '../../Modal'
-import Overlay from '../../Overlay/overlay'
->>>>>>> Stashed changes
 import { userData } from '../../../hooks'
+import Modal from '../../Modal'
 
 const Conversation: React.FC<Comment> = (props: Comment) => {
   dayjs.extend(relativeTime)
@@ -92,10 +88,8 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
       <div className='mt-[0.5rem]'>
         <input type='text' placeholder='Reply...' value={replyText} onChange={(e) => setReplyText(e.target.value)} />
         <button onClick={handleReply}>Reply</button>
-<<<<<<< Updated upstream
-      </div> */}
-=======
       </div>
+      </div> */}
       <Modal title='Confirmation' isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
         <div className='p-8 border-t border-neutral-200'>
           <p>You must log in to vote.</p>
@@ -109,7 +103,6 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
           </Button>
         </div>
       </Modal>
->>>>>>> Stashed changes
     </div>
   )
 }
