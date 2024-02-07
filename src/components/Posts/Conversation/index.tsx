@@ -133,7 +133,10 @@ const SampleConvo: React.FC = () => {
   const getAllComments = async () => {
     if (!post_id) return
     const res = await getCommentsByPost(post_id)
-    setComments(res)
+    const sortedComments: Comment[] = res.sort(
+      (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+    setComments(sortedComments)
   }
 
   useEffect(() => {
