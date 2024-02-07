@@ -14,7 +14,11 @@ const Post = ({ variant }: { variant: string }) => {
     setLoading(true)
     if (variant === 'all') {
       const res: PostTypes[] = await getAllPosts()
-      setPosts(res)
+      const sortedArray: PostTypes[] = res.sort(
+        (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+
+      setPosts(sortedArray)
       setLoading(false)
     }
 
@@ -22,7 +26,10 @@ const Post = ({ variant }: { variant: string }) => {
       const userId = params['user_id']
       if (userId) {
         const res: PostTypes[] = await getPostsByUserID(userId)
-        setPosts(res)
+        const sortedArray: PostTypes[] = res.sort(
+          (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+        setPosts(sortedArray)
         setLoading(false)
       }
     }

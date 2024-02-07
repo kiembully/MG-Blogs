@@ -65,3 +65,14 @@ export interface ApiResponse {
     }
   }
 }
+
+export interface PostData {
+  id: number
+  title: string
+  body: string
+  tags: string[]
+  commentsCount: number
+  votes: { upvotes: string[]; downvotes: string[] }
+  user: { id: number; name: string }
+  createdAt: string
+}

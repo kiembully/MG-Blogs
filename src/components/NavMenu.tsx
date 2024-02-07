@@ -6,12 +6,27 @@ import { useNavigate } from 'react-router-dom'
 const NavMenu: React.FC = () => {
   const [user, setUser] = useState<User | null>()
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const [isScrolled, setIsScrolled] = useState<boolean>(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     const data = localStorage.getItem('user')
     if (data) {
       setUser(JSON.parse(data))
+    }
+  }, [])
+
+  useEffect(() => {
+    const data = localStorage.getItem('user')
+    if (data) {
+      setUser(JSON.parse(data))
+    }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
@@ -38,7 +53,7 @@ const NavMenu: React.FC = () => {
         >
           <div className='flex justify-center items-center gap-4'>
             <img alt='avatar icon' src='/icons/default-avatar.png'></img>
-            <p>{user?.name}</p>
+            <p className='font-medium text-[1rem]'>{user?.name}</p>
           </div>
           <button>
             <img alt='toggle icon' src='/icons/caret-down-icon.png' />
@@ -69,17 +84,31 @@ const NavMenu: React.FC = () => {
   }
 
   return (
-    <div className='bg-white px-16'>
+    <div
+      className={`bg-white px-0 px-8 md:px-16 fixed w-full top-0 z-10 transition-all duration-300 ${
+        isScrolled ? 'shadow-lg' : ''
+      }`}
+    >
       <div className='flex gap-4 min-h-20 justify-center items-center w-full mx-auto max-w-[1440px] px-4 lg:px-8'>
-        <div className='flex gap-2'>
+        <div className='flex gap-2 items-center'>
           <img
             height='24px'
             src='/icons/mg-logo.svg'
             alt='mg-logo'
-            className='cursor-pointer'
+            className='cursor-pointer hidden md:flex'
             onClick={() => navigate('/')}
           />
-          <span className='text-xl neutral-800'> Blogs</span>
+          <img
+            height='24px'
+            src='/assets/mg-logo.svg'
+            alt='mg-logo'
+            className='cursor-pointer flex md:hidden'
+            onClick={() => navigate('/')}
+          />
+          <span className='neutral-800 text-25 font-semibold leading-25 tracking-normal'>
+            {' '}
+            Blogs
+          </span>
         </div>
         <div className='flex flex-auto px-12 justify-center'>
           <div className='hidden items-center max-w-[600px] h-12 bg-neutral-100 w-full px-4 rounded-md flex lg:flex'>
