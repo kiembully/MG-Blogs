@@ -87,7 +87,7 @@ export const createPost = async (data: Post) => {
         title: data.title,
         body: data.body,
         tags: data.tags,
-        comments: data.comments,
+        comments: data.commentsCount,
         voteCounts: data.voteCounts
       }
     })
@@ -115,7 +115,7 @@ export const updatePost = async (data: Post) => {
         title: data.title,
         body: data.body,
         tags: data.tags,
-        comments: data.comments,
+        comments: data.commentsCount,
         voteCounts: data.voteCounts
       }
     })
@@ -236,6 +236,20 @@ export const getCommentByID = async (post_id: string, comment_id: string) => {
       url: `/api/posts/${post_id}/comments/${comment_id}`
     })
     return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const addReply = async (comment_id: string, data: Comment) => {
+  console.log(comment_id)
+  console.log(data)
+  try {
+    // const res = await instance({
+    //   method:"POST",
+    //   url: ``
+    // })
+    // return res
   } catch (error) {
     console.log(error)
   }

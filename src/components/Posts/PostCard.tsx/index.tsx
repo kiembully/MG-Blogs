@@ -65,58 +65,37 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
   }
 
   return (
-    <div
-      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse relative'}`}
-      // onClick={() => navigate(`/post/${post?.id}/view-post`)}
-    >
+    <div className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg relative overflow-hidden cursor-pointer z-0 ${viewMode && 'flex-col-reverse relative pb-8'}`} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
       {viewMode && <Conversation />}
       {viewMode && post && <Interaction post={post} />}
-      <div
-        className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
-      >
+      <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>
         <div className={`flex items-center ${viewMode ? 'flex-row' : 'flex-col flex-1 '}`}>
           <Button variant='ghost'>
             <img alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
-          <p className='text-sm'>1.1k</p>
+          <p className='text-sm text-neutral-800'>{post?.voteCounts ? post.voteCounts.upVotes.length + post.voteCounts.downVotes.length : 0}</p>
           <Button variant='ghost'>
             <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-          <Button
-            variant='ghost'
-            classNames={viewMode ? 'flex gap-1' : 'mt-8'}
-            onClick={() => navigate(`/post/${post?.id}/view-post`)}
-          >
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
-            <p className={`text-black text-sm ${viewMode && 'whitespace-nowrap'}`}>
-              {post?.comments?.length || 0} {viewMode && 'Comments'}
+            <p className={`text-neutral-800 text-sm ${viewMode && 'whitespace-nowrap'}`}>
+              {post?.commentsCount} {viewMode && 'Comments'}
             </p>
           </Button>
-          <Button
-            variant='ghost'
-            classNames={viewMode ? 'flex flex-1 gap-1' : ''}
-            onClick={() => handleFacebookShare(post?.id)}
-          >
+          <Button variant='ghost' classNames={viewMode ? 'flex flex-1 gap-1' : ''}>
             <img alt='up vote icon' src='/icons/share-icon.svg' />
-            {viewMode && <p className='whitespace-nowrap my-auto text-sm text-black'>Share</p>}
+            {viewMode && <p className='whitespace-nowrap my-auto text-sm text-neutral-800'>Share</p>}
           </Button>
           {userData()?.id === post?.user?.id && (
             <>
-              <Button
-                variant='ghost'
-                classNames={viewMode ? 'flex gap-1' : ''}
-                onClick={() => navigate(`/post/${post?.id}/edit-post`)}
-              >
+              <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''} onClick={() => navigate(`/post/${post?.id}/edit-post`)}>
                 <img alt='up vote icon' src='/icons/write-icon.svg' />
                 {viewMode && <p className='whitespace-nowrap text-black text-sm'>Edit</p>}
               </Button>
-              <Button
-                variant='ghost'
-                classNames={viewMode ? 'flex gap-1' : ''}
-                onClick={() => handleSelectPost(post?.id)}
-              >
+              <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''} onClick={() => handleSelectPost(post?.id)}>
                 <img alt='up vote icon' src='/icons/delete-icon.svg' />
                 {viewMode && <p className='whitespace-nowrap text-black text-sm'>Delete</p>}
               </Button>
@@ -140,10 +119,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
             {post?.tags?.length ? (
               post?.tags.map((tag, index) => {
                 return (
-                  <p
-                    className='text-gray-500 text-sm whitespace-nowrap leading-2'
-                    key={`${tag}${index}`}
-                  >
+                  <p className='text-gray-500 text-sm whitespace-nowrap leading-2' key={`${tag}${index}`}>
                     {tag}
                   </p>
                 )
