@@ -56,9 +56,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
     >
       {viewMode && <Conversation />}
       {viewMode && post && <Interaction post={post} />}
-      <div
-        className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}
-      >
+      <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>
         <div className={`flex items-center ${viewMode ? 'flex-row' : 'flex-col flex-1 '}`}>
           <Button variant='ghost'>
             <img alt='up vote icon' src='/icons/arrow.svg' />
@@ -69,11 +67,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-          <Button
-            variant='ghost'
-            classNames={viewMode ? 'flex gap-1' : 'mt-8'}
-            onClick={() => navigate(`/post/${post?.id}/view-post`)}
-          >
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'} onClick={() => navigate(`/post/${post?.id}/view-post`)}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-black text-sm ${viewMode && 'whitespace-nowrap'}`}>
               {post?.comments?.length || 0} {viewMode && 'Comments'}
@@ -85,19 +79,11 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </Button>
           {userData()?.id === post?.user?.id && (
             <>
-              <Button
-                variant='ghost'
-                classNames={viewMode ? 'flex gap-1' : ''}
-                onClick={() => navigate(`/post/${post?.id}/edit-post`)}
-              >
+              <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''} onClick={() => navigate(`/post/${post?.id}/edit-post`)}>
                 <img alt='up vote icon' src='/icons/write-icon.svg' />
                 {viewMode && <p className='whitespace-nowrap text-black text-sm'>Edit</p>}
               </Button>
-              <Button
-                variant='ghost'
-                classNames={viewMode ? 'flex gap-1' : ''}
-                onClick={() => handleSelectPost(post?.id)}
-              >
+              <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''} onClick={() => handleSelectPost(post?.id)}>
                 <img alt='up vote icon' src='/icons/delete-icon.svg' />
                 {viewMode && <p className='whitespace-nowrap text-black text-sm'>Delete</p>}
               </Button>

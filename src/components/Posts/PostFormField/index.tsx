@@ -134,14 +134,9 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
   }, [params['post-id']])
 
   return (
-    <form
-      className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen mt-20'
-      onSubmit={variant === 'create' ? createPostHandler : updatePostHandler}
-    >
+    <form className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen mt-20' onSubmit={variant === 'create' ? createPostHandler : updatePostHandler}>
       <div className='flex mb-4'>
-        <h1 className='flex-auto text-25 font-bold leading-25 tracking-semibold'>
-          {variant === 'create' ? 'Create Post' : 'Edit Post'}
-        </h1>
+        <h1 className='flex-auto text-25 font-bold leading-25 tracking-semibold'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
         <p className='text-16 font-medium leading-16 tracking-normal text-indigo-500'>
           Draft <span className='p-1 bg-[#312E81] text-white text-xs rounded-sm'>12</span>
         </p>
@@ -153,39 +148,14 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
               <CommonSpinner />
             </Overlay>
           )}
-          <TextField
-            label='Title'
-            type='text'
-            value={newPost.title}
-            name='title'
-            fullWidth
-            onChange={onChange}
-            classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal'
-            disabled={loading}
-          />
-          <TextField
-            label='Body text'
-            type='text'
-            value={newPost.bodyText}
-            name='bodyText'
-            fullWidth
-            onChange={onChange}
-            classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal'
-            disabled={loading}
-          />
+          <TextField label='Title' type='text' value={newPost.title} name='title' fullWidth onChange={onChange} classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal' disabled={loading} />
+          <TextField label='Body text' type='text' value={newPost.bodyText} name='bodyText' fullWidth onChange={onChange} classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal' disabled={loading} />
           <div>
             <p className='text-base font-medium leading-16 tracking-normal mb-2'>Tags</p>
             <div className='flex flex-wrap gap-2'>
               {allTags.map((tag) => {
                 return (
-                  <button
-                    className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${
-                      newPost.tags.includes(tag) && 'text-primary-500 border-primary-500'
-                    }`}
-                    key={tag}
-                    type='button'
-                    onClick={() => handleTagClick(tag)}
-                  >
+                  <button className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${newPost.tags.includes(tag) && 'text-primary-500 border-primary-500'}`} key={tag} type='button' onClick={() => handleTagClick(tag)}>
                     <div>{newPost.tags.includes(tag) ? '-' : '+'}</div>
                     {tag}
                   </button>
