@@ -114,7 +114,6 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     setLoading(true)
     if (variant === 'update') {
       const res = await getPostByID(id)
-      console.log(res)
       const post: CreatePostTypes = {
         title: res?.title,
         bodyText: res?.body,

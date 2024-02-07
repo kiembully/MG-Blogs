@@ -4,6 +4,9 @@ import Button from '../../Button'
 import CommonDivider from '../../CommonDivider'
 import { Post } from '../../../helpers'
 import { addComment } from '../../../api'
+import { useNavigate } from 'react-router'
+import Overlay from '../../Overlay/overlay'
+import CommonSpinner from '../../CommonSpinner'
 
 type CommentProps = {
   comment: string
@@ -14,17 +17,42 @@ type InterfactionProps = {
 }
 
 const Interaction = ({ post }: InterfactionProps) => {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [resMessage, setResMessage] = useState<string>('')
   const [newPost, setNewPost] = useState<CommentProps>({
     comment: ''
   })
 
   const addCommentHandler = async () => {
     if (post.id && post.user) {
-      const res = await addComment(post.id, {
+      if (newPost.comment.length <= 0) {
+        setLoading(true)
+        setLoading(false)
+        setError(true)
+        setResMessage('Comment cannot be empty.')
+        return
+      }
+
+      const res: any = await addComment(post.id, {
         message: newPost.comment,
         voteCounts: { upVotes: [], downVotes: [] },
         sender_name: post.user.name
       })
+
+      console.log(res)
+      if (res?.data?.data) {
+        setLoading(false)
+        setError(false)
+        setResMessage('')
+        setNewPost((prevState) => ({ ...prevState, comment: '' }))
+        // navigate('/')
+      } else {
+        setLoading(false)
+        setError(true)
+        setResMessage('Unable to post comment. try again!')
+      }
     }
   }
 
@@ -48,12 +76,20 @@ const Interaction = ({ post }: InterfactionProps) => {
           onChange={onChange}
         />
       </div>
+      <p className={`text-center text-xs ${error && 'text-[red]'}`}>{resMessage}</p>
       <div className='w-full flex flex-row-reverse mb-8'>
         <Button classNames='mt-6' onClick={() => addCommentHandler()}>
           Comment
         </Button>
       </div>
       <CommonDivider orientation='horizontal' />
+      {loading ? (
+        <Overlay>
+          <CommonSpinner />
+        </Overlay>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
