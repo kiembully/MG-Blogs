@@ -39,7 +39,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
         <div
           className={`flex items-center gap-1 ${viewMode ? 'flex-row w-full gap-2' : 'flex-col'}`}
         >
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : ''}>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-black ${viewMode && 'whitespace-nowrap'}`}>
               24 {viewMode && 'Comments'}
@@ -71,7 +71,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
         <div className='mb-4'>
           <div className='flex gap-2 flex-auto items-center'>
             <img alt='post avatar' src='/icons/default-avatar.png' className='h-5 w-5' />
-            <a href='/profile' className='font-medium flex-auto'>
+            <a href={`/profile/${post?.user?.id}`} className='font-medium flex-auto'>
               {post?.user?.name}
             </a>
             <div className='flex items-center gap-1 text-gray-500'>
@@ -80,7 +80,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
             </div>
           </div>
           <div className='relative flex flex-row gap-2'>
-            {post?.tags.length ? (
+            {post?.tags?.length ? (
               post?.tags.map((tag, index) => {
                 return (
                   <p className='text-gray-500 text-sm' key={`${tag}${index}`}>
