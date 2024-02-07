@@ -72,7 +72,7 @@ export const signin = async (data: LoginCredentials) => {
   }
 }
 
-export const createPost = async (data: { title: string; body: string }) => {
+export const createPost = async (data: Post) => {
   try {
     const token = localStorage.getItem('authorization')
 
@@ -87,13 +87,44 @@ export const createPost = async (data: { title: string; body: string }) => {
       url: '/api/posts',
       data: {
         title: data.title,
-        body: data.body
+        body: data.body,
+        tags: data.tags,
+        comments: data.comments,
+        voteCounts: data.voteCounts
       }
     })
 
-    console.log(res)
+    return res.status
   } catch (error) {
-    console.log(error)
+    return 500
+  }
+}
+
+export const updatePost = async (data: Post) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    const res = await instance({
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: `/api/posts/${data.id}`,
+      data: {
+        title: data.title,
+        body: data.body,
+        tags: data.tags,
+        comments: data.comments,
+        voteCounts: data.voteCounts
+      }
+    })
+
+    return res.status
+  } catch (error) {
+    return { code: 404 }
   }
 }
 

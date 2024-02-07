@@ -27,6 +27,8 @@ export interface Post {
   voteCounts: VoteCount
   image?: string | Blob
   comments: Comment[]
+  formattedCreatedAt?: string
+  id: string
 }
 
 export interface Tags {
@@ -35,8 +37,6 @@ export interface Tags {
 }
 
 export interface Comment {
-  creatorID: BigInt
-  postID: BigInt
   message: string
   createdAt: string //this is date and time
   updatedAt: string //this is date and time
@@ -45,7 +45,6 @@ export interface Comment {
 }
 
 export interface VoteCount {
-  referenceId: BigInt //id of the post of comment
   upVotes: string[] //array of user id's that has up vote
   downVotes: string[] //array of user id's that has down vote
   //will use hashmap to check if a user has upvoted or downvoted the post or comment to render correct icon. It will have O(1) notation.

@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { User } from '../helpers'
+import { ProfileOptionModal } from './index'
 import { useNavigate } from 'react-router-dom'
 
 const NavMenu: React.FC = () => {
-  const navigate = useNavigate()
   const [user, setUser] = useState<User | null>()
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const data = localStorage.getItem('user')
-    console.log(localStorage.getItem('user'))
     if (data) {
       setUser(JSON.parse(data))
     }
-  }, [user])
+  }, [])
 
   const renderActiveUserMenu = (): JSX.Element => {
     return (
@@ -26,20 +27,24 @@ const NavMenu: React.FC = () => {
         <button
           type='button'
           className='h-12 w-12 rounded-md bg-neutral-100 flex items-center justify-center'
+          onClick={() => navigate('/post/create-post')}
         >
           <img alt='add icon' src='/icons/add-icon.png' />
         </button>
         <span className='h-12 w-[1px] bg-neutral-200'></span>
         <div
-          className='flex justify-center items-center gap-4'
-          onClick={() => navigate(user?.id ? `/profile/${user.id}` : '#')}
+          className='relative flex flex-row gap-4 px-3 py-2 rounded cursor-pointer hover:bg-neutral-100'
+          onClick={() => setIsDropdownOpen((prevState) => !prevState)}
         >
-          <img alt='avatar icon' src='/icons/default-avatar.png'></img>
-          <p>{user?.name}</p>
+          <div className='flex justify-center items-center gap-4'>
+            <img alt='avatar icon' src='/icons/default-avatar.png'></img>
+            <p>{user?.name}</p>
+          </div>
+          <button>
+            <img alt='toggle icon' src='/icons/caret-down-icon.png' />
+          </button>
+          {isDropdownOpen && <ProfileOptionModal user={user!} />}
         </div>
-        <button>
-          <img alt='toggle icon' src='/icons/caret-down-icon.png' />
-        </button>
       </>
     )
   }

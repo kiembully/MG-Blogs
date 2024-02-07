@@ -48,7 +48,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           <Button
             variant='ghost'
             classNames={viewMode ? 'flex gap-1' : ''}
-            onClick={() => navigate('/post/1/edit-post')}
+            onClick={() => navigate(`/post/${post?.id}/edit-post`)}
           >
             <img alt='up vote icon' src='/icons/write-icon.svg' />
             {viewMode && <p className='whitespace-nowrap text-black'>Edit</p>}
@@ -64,18 +64,18 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           <div className='flex gap-2 flex-auto items-center'>
             <img alt='post avatar' src='/icons/default-avatar.png' className='h-5 w-5' />
             <a href='/profile' className='font-medium flex-auto'>
-              Kirby Borromeo
+              {post?.title}
             </a>
             <div className='flex items-center gap-1 text-gray-500'>
               <img alt='clock icon' src='/icons/ion_time-outline.svg' className='w-4 h-4' />
-              <p>6 hours ago</p>
+              <p>{post?.formattedCreatedAt}</p>
             </div>
           </div>
           <p className='text-gray-500 text-sm'>@design-talks</p>
         </div>
 
         <div>
-          <p className='font-medium text-lg mb-2'>{post?.title}</p>
+          <p className='font-medium text-lg mb-2'>{post?.body}</p>
 
           <div className='min-h-48 w-full overflow-hidden rounded-md'>
             <div
