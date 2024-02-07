@@ -5,16 +5,27 @@ import { addReply, getCommentsByPost } from '../../../api'
 import { Comment } from '../../../helpers'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+<<<<<<< Updated upstream
+=======
+import Modal from '../../Modal'
+import Overlay from '../../Overlay/overlay'
+>>>>>>> Stashed changes
 import { userData } from '../../../hooks'
 
 const Conversation: React.FC<Comment> = (props: Comment) => {
   dayjs.extend(relativeTime)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const [replyText, setReplyText] = useState<string>('')
   const [showReplies, setShowReplies] = useState<boolean>(false)
 
   const [commentVotes, setCommentVotes] = useState<number>(0)
   const handleVote = (voteType: 'upvote' | 'downvote') => {
+    console.log('asd')
+    if (!userData()) {
+      setIsOpen(true)
+      return
+    }
     // Implement logic to handle upvote and downvote
     if (voteType === 'upvote') {
       setCommentVotes(commentVotes + 1)
@@ -81,7 +92,24 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
       <div className='mt-[0.5rem]'>
         <input type='text' placeholder='Reply...' value={replyText} onChange={(e) => setReplyText(e.target.value)} />
         <button onClick={handleReply}>Reply</button>
+<<<<<<< Updated upstream
       </div> */}
+=======
+      </div>
+      <Modal title='Confirmation' isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
+        <div className='p-8 border-t border-neutral-200'>
+          <p>You must log in to vote.</p>
+        </div>
+        <div className='flex items-center flex-row-reverse gap-2 py-4 px-8 border-t border-neutral-200'>
+          <Button type='button' size='sm'>
+            Login
+          </Button>
+          <Button type='button' size='sm' variant='outlined' onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+        </div>
+      </Modal>
+>>>>>>> Stashed changes
     </div>
   )
 }
