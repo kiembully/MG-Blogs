@@ -15,6 +15,7 @@ type Props = {
 const Modal: FC<Props> = ({ isOpen, setClose, title = ' ', footer, children, classNames }) => {
   return (
     <div
+      aria-label='modal'
       className={cn(
         isOpen ? '' : 'hidden',
         'z-50 fixed overflow-hidden h-screen w-screen top-0 left-0 backdrop-blur-[2px] backdrop-brightness-50'
