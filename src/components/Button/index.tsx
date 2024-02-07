@@ -48,6 +48,7 @@ const Button: FC<Props> = ({
       )}
       disabled={disabled}
       onClick={onClick}
+      aria-label='button'
     >
       {children}
     </button>
