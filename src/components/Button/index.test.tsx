@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import Button from '.'
 import { render, screen, fireEvent } from '@testing-library/react'
 

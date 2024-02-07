@@ -14,9 +14,7 @@ const Post = ({ variant }: { variant: string }) => {
     setLoading(true)
     if (variant === 'all') {
       const res: PostTypes[] = await getAllPosts()
-      const sortedArray: PostTypes[] = res.sort(
-        (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
+      const sortedArray: PostTypes[] = res.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
       setPosts(sortedArray)
       setLoading(false)
@@ -26,9 +24,7 @@ const Post = ({ variant }: { variant: string }) => {
       const userId = params['user_id']
       if (userId) {
         const res: PostTypes[] = await getPostsByUserID(userId)
-        const sortedArray: PostTypes[] = res.sort(
-          (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        )
+        const sortedArray: PostTypes[] = res.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         setPosts(sortedArray)
         setLoading(false)
       }
@@ -42,13 +38,7 @@ const Post = ({ variant }: { variant: string }) => {
   return (
     <div>
       <h2 className='mb-4 text-base font-medium leading-6 tracking-normal'>Recent Posts</h2>
-      {loading ? (
-        <>Loading</>
-      ) : posts.length > 0 ? (
-        posts.map((post, index) => <PostCard key={`${post.title}${index}`} post={post} />)
-      ) : (
-        <EmptyPost />
-      )}
+      {loading ? <>Loading</> : posts.length > 0 ? posts.map((post, index) => <PostCard key={`${post.title}${index}`} post={post} />) : <EmptyPost />}
     </div>
   )
 }

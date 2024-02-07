@@ -1,14 +1,16 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import React, { render, screen, fireEvent } from '@testing-library/react'
 import Modal from '.'
 
 describe('Modal', () => {
   it('should renders when isOpen is true', () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     render(<Modal isOpen={true} setClose={() => {}} />)
 
     expect(screen.getByLabelText('modal')).toBeInTheDocument()
   })
 
   it('should not renders when isOpen is false', () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     render(<Modal isOpen={false} setClose={() => {}} />)
 
     expect(screen.getByLabelText('modal')).toBeInTheDocument()
@@ -20,6 +22,7 @@ describe('Modal', () => {
     const children = <div>Content</div>
 
     render(
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       <Modal isOpen={true} setClose={() => {}} title={title} footer={footer}>
         {children}
       </Modal>

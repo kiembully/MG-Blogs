@@ -53,46 +53,10 @@ const SignUp: React.FC = () => {
       <form className='w-72 h-screen flex items-center justify-center'>
         <div className='relative my-autoflex flex-col item-start justify-start'>
           <p className='text-2xl font-medium'>Sign Up</p>
-          <TextField
-            label='Full name'
-            type='text'
-            name='fullname'
-            value={user.fullname}
-            onChange={onChange}
-            fullWidth
-            classNames='mt-4'
-            disabled={loading}
-          />
-          <TextField
-            label='Email'
-            type='text'
-            name='email'
-            value={user.email}
-            onChange={onChange}
-            fullWidth
-            classNames='mt-4'
-            disabled={loading}
-          />
-          <TextField
-            label='Username'
-            type='text'
-            name='username'
-            value={user.username}
-            onChange={onChange}
-            fullWidth
-            classNames='mt-4'
-            disabled={loading}
-          />
-          <TextField
-            label='Password'
-            type='password'
-            name='password'
-            value={user.password}
-            onChange={onChange}
-            fullWidth
-            classNames='mt-4'
-            disabled={loading}
-          />
+          <TextField label='Full name' type='text' name='fullname' value={user.fullname} onChange={onChange} fullWidth classNames='mt-4' disabled={loading} />
+          <TextField label='Email' type='text' name='email' value={user.email} onChange={onChange} fullWidth classNames='mt-4' disabled={loading} />
+          <TextField label='Username' type='text' name='username' value={user.username} onChange={onChange} fullWidth classNames='mt-4' disabled={loading} />
+          <TextField label='Password' type='password' name='password' value={user.password} onChange={onChange} fullWidth classNames='mt-4' disabled={loading} />
           <span className='text-sm mt-6'>
             By continuing you are setting up a Mashup Garage Blog account and agree to our{' '}
             <a href='#' className='underline text-indigo-500 underline-offset-2'>

@@ -16,10 +16,7 @@ const Feed: FC = () => {
   }, [])
 
   return (
-    <div
-      aria-label='feed-container'
-      className='container mt-20 min-h-screen pt-8 mx-auto max-w-[840px] px-4 md:px-8'
-    >
+    <div aria-label='feed-container' className='container mt-20 min-h-screen pt-8 mx-auto max-w-[840px] px-4 md:px-8'>
       <Trending />
       <CommonDivider orientation='horizontal' />
       <div className='mt-8 grid grid-cols-12 gap-8'>

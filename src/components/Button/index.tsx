@@ -12,16 +12,7 @@ type Props = {
   onClick?: () => void
 }
 
-const Button: FC<Props> = ({
-  type = 'button',
-  children,
-  variant = 'default',
-  size = 'md',
-  classNames,
-  fullWidth,
-  disabled,
-  onClick
-}) => {
+const Button: FC<Props> = ({ type = 'button', children, variant = 'default', size = 'md', classNames, fullWidth, disabled, onClick }) => {
   const renderButtonStyle = (val: string) => {
     switch (val) {
       case 'ghost': {
@@ -37,19 +28,7 @@ const Button: FC<Props> = ({
   }
 
   return (
-    <button
-      type={type}
-      className={cn(
-        `cursor-pointer text-${size}`,
-        renderButtonStyle(variant),
-        classNames,
-        fullWidth ? 'w-full' : 'w-max',
-        disabled && 'bg-neutral-300 cursor-not-allowed'
-      )}
-      disabled={disabled}
-      onClick={onClick}
-      aria-label='button'
-    >
+    <button type={type} className={cn(`cursor-pointer text-${size}`, renderButtonStyle(variant), classNames, fullWidth ? 'w-full' : 'w-max', disabled && 'bg-neutral-300 cursor-not-allowed')} disabled={disabled} onClick={onClick} aria-label='button'>
       {children}
     </button>
   )

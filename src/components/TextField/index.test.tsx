@@ -3,6 +3,7 @@ import TextField from '.'
 
 describe('Input Field', () => {
   it('should display input with label', () => {
+    // eslint-disable-next-line react/react-in-jsx-scope
     render(<TextField type='text' label='Username' placeholder='Enter your username' />)
     expect(screen.getByLabelText('label')).toHaveTextContent('Username')
     expect(screen.getByPlaceholderText('Enter your username')).toBeInTheDocument()
@@ -11,9 +12,8 @@ describe('Input Field', () => {
 
   it('should handles onChange event correctly', () => {
     const mockOnChange = jest.fn()
-    render(
-      <TextField type='text' label='Username' name='Username' value='' onChange={mockOnChange} />
-    )
+    // eslint-disable-next-line react/react-in-jsx-scope
+    render(<TextField type='text' label='Username' name='Username' value='' onChange={mockOnChange} />)
 
     fireEvent.change(screen.getByLabelText('input-field'), { target: { value: 'username-here' } })
     expect(mockOnChange).toHaveBeenCalledWith(expect.any(Object))

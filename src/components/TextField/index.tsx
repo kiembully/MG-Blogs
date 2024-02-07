@@ -34,19 +34,7 @@ const TextField: FC<Props> = ({
       <p aria-label='label' className='mb-2'>
         {label}
       </p>
-      <input
-        aria-label='input-field'
-        name={name}
-        value={value}
-        type={type}
-        className={cn(
-          'rounded-sm h-12 px-4 py-2 outline-indigo-200 text-sm text-black/75 bg-neutral-100',
-          fullWidth ? 'w-full' : 'w-max'
-        )}
-        placeholder={placeholder}
-        onChange={onChange}
-        disabled={disabled}
-      />
+      <input aria-label='input-field' name={name} value={value} type={type} className={cn('rounded-sm h-12 px-4 py-2 outline-indigo-200 text-sm text-black/75 bg-neutral-100', fullWidth ? 'w-full' : 'w-max')} placeholder={placeholder} onChange={onChange} disabled={disabled} />
     </div>
   )
 }

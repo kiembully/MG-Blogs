@@ -28,7 +28,11 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
     if (!userData()) return
     // Implement logic to handle adding a reply
     // console.log(`Replying to comment ${id} with text: ${replyText}`)
-    const res = await addReply(props.id, { sender_name: userData().username, message: replyText, voteCounts: { upVotes: [], downVotes: [] } })
+    const res = await addReply(props.id, {
+      sender_name: userData().username,
+      message: replyText,
+      voteCounts: { upVotes: [], downVotes: [] }
+    })
   }
 
   return (

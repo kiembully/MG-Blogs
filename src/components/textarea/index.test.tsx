@@ -7,14 +7,7 @@ describe('Text area', () => {
     // Mock function for the onChange prop
     const mockOnChange = jest.fn()
 
-    render(
-      <TextArea
-        label='Comment'
-        name='title'
-        placeholder='Write a comment...'
-        onChange={mockOnChange}
-      />
-    )
+    render(<TextArea label='Comment' name='title' placeholder='Write a comment...' onChange={mockOnChange} />)
 
     expect(screen.getByLabelText('label')).toHaveTextContent('Comment')
     expect(screen.getByPlaceholderText('Write a comment...')).toBeInTheDocument()

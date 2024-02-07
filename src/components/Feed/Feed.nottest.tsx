@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import Feed from './Feed'
 
 describe('Feed component', () => {
+  // eslint-disable-next-line react/react-in-jsx-scope
   render(<Feed />)
 
   it('should render feed', () => {

@@ -51,30 +51,9 @@ const Login: React.FC = () => {
       </span>
       <form className='relative w-72 flex flex-col item-start justify-start mb-28'>
         <p className='text-2xl font-medium'>Login</p>
-        <TextField
-          label='Username'
-          type='text'
-          value={credentials.email}
-          name='email'
-          fullWidth
-          onChange={onChange}
-          classNames='mt-2'
-          disabled={loading}
-        />
-        <TextField
-          label='Password'
-          type='password'
-          value={credentials.password}
-          name='password'
-          fullWidth
-          onChange={onChange}
-          classNames='mt-2'
-          disabled={loading}
-        />
-        <a
-          href={`/forgot-password?profileID=${'12321312qeqw'}`}
-          className='text-xs text-primary-500 mt-2'
-        >
+        <TextField label='Username' type='text' value={credentials.email} name='email' fullWidth onChange={onChange} classNames='mt-2' disabled={loading} />
+        <TextField label='Password' type='password' value={credentials.password} name='password' fullWidth onChange={onChange} classNames='mt-2' disabled={loading} />
+        <a href={`/forgot-password?profileID=${'12321312qeqw'}`} className='text-xs text-primary-500 mt-2'>
           Forgot your password?
         </a>
         <Button classNames='mt-8' onClick={() => onSubmit()} disabled={loading} fullWidth>

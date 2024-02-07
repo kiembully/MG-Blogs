@@ -1,14 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import {
-  MainPage,
-  Login,
-  Signup,
-  CreatePost,
-  EditPost,
-  NotFoundPage,
-  ForgotPassword
-} from './pages'
+import { MainPage, Login, Signup, CreatePost, EditPost, NotFoundPage, ForgotPassword } from './pages'
 import Profile from './pages/Profile'
 import ViewPost from './pages/posts/ViewPost'
 
