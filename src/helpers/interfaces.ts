@@ -26,7 +26,7 @@ export interface Post {
   tags: string[]
   voteCounts: VoteCount
   image?: string | Blob
-  comments: Comment[]
+  commentsCount: number
   createdAt?: string
   id?: string
   user?: {
@@ -47,7 +47,7 @@ export interface Comment {
   createdAt?: string //this is date and time
   updatedAt?: string //this is date and time
   voteCounts: VoteCount
-  replies?: Comment[]
+  comments?: Comment[]
   user?: {
     id: number
     name: string
