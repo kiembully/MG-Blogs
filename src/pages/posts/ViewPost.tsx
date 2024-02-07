@@ -23,7 +23,7 @@ const ViewPost = () => {
 
   return (
     <NavMenuLayout>
-      <div className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen'>
+      <div className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen mt-20'>
         <PostCard viewMode post={post} />
       </div>
     </NavMenuLayout>

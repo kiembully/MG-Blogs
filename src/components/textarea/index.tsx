@@ -28,8 +28,11 @@ const TextArea: FC<Props> = ({
 }) => {
   return (
     <div className={classNames}>
-      <p className='text-sm mb-2'>{label}</p>
+      <p aria-label='label' className='text-sm mb-2'>
+        {label}
+      </p>
       <textarea
+        aria-label='text-area'
         name={name}
         value={value}
         className={cn(

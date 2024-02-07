@@ -11,7 +11,9 @@ describe('Input Field', () => {
 
   it('should handles onChange event correctly', () => {
     const mockOnChange = jest.fn()
-    render(<TextField type='password' label='Username' name='Username' value='' onChange={mockOnChange} />)
+    render(
+      <TextField type='text' label='Username' name='Username' value='' onChange={mockOnChange} />
+    )
 
     fireEvent.change(screen.getByLabelText('input-field'), { target: { value: 'username-here' } })
     expect(mockOnChange).toHaveBeenCalledWith(expect.any(Object))
