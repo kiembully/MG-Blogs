@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import TextField from '../../TextField'
 import Button from '../../Button'
 import { createPost } from '../../../api'
+import Overlay from '../../Overlay/overlay'
+import CommonSpinner from '../../CommonSpinner'
+import { useNavigate } from 'react-router-dom'
 
 type Tag = {
   name: string
@@ -19,6 +22,7 @@ type PostFormFieldProps = {
 }
 
 const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
+  const navigate = useNavigate()
   const [newPost, setNewPost] = useState<CreatePostTypes>({
     title: '',
     bodyText: '',
@@ -45,23 +49,50 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     })
   }
 
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [resMessage, setResMessage] = useState<string>()
   const createPostHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (!newPost.title || !newPost.bodyText) {
+      setError(true)
+      setResMessage('Title and Body text cannot be empty')
+      return
+    }
+
+    setLoading(true)
     const res = await createPost({
       title: newPost.title,
       body: newPost.bodyText
     })
+
+    if (res === 200) {
+      setLoading(false)
+      setError(false)
+      setResMessage('Success!')
+      navigate('/')
+    } else {
+      setLoading(false)
+      setError(true)
+      setResMessage('Unable to create post. try again!')
+    }
   }
 
   return (
-    <form className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen' onSubmit={createPostHandler}>
+    <form className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen' onSubmit={createPostHandler}>
       <div className='flex'>
         <h1 className='flex-auto'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
         <p>
           Draft <span>12</span>
         </p>
       </div>
-      <div className='p-4 rounded-md bg-white'>
+      <div className='overflow-hidden relative p-4 rounded-md bg-white'>
+        {loading && (
+          <Overlay>
+            <CommonSpinner />
+          </Overlay>
+        )}
         <TextField
           label='Title'
           type='text'
@@ -70,6 +101,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
           fullWidth
           onChange={onChange}
           classNames='mt-2 w-auto'
+          disabled={loading}
         />
         <TextField
           label='Body text'
@@ -79,6 +111,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
           fullWidth
           onChange={onChange}
           classNames='mt-2 w-auto'
+          disabled={loading}
         />
         <div>
           <p>Tags</p>
@@ -90,7 +123,11 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
                 }`}
                 key={tag.name}
               >
-                <button className='bg-[transparent]' onClick={() => handleTagClick(index)}>
+                <button
+                  type='button'
+                  className='bg-[transparent]'
+                  onClick={() => handleTagClick(index)}
+                >
                   {tag.selected ? '-' : '+'}
                 </button>
                 {tag.name}
@@ -98,13 +135,14 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
             ))}
           </div>
         </div>
-        <div className='flex flex-row-reverse gap-2'>
+        <div className='flex items-center flex-row-reverse gap-2'>
           <Button type='submit' classNames='mt-6'>
             {variant === 'create' ? 'Post' : 'Update'}
           </Button>
-          <Button classNames='mt-6' variant='outlined'>
+          <Button type='button' classNames='mt-6' variant='outlined'>
             Save as Draft
           </Button>
+          <p className={`text-left text-xs flex-1 mt-6 ${error && 'text-[red]'}`}>{resMessage}</p>
         </div>
       </div>
     </form>

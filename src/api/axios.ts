@@ -91,9 +91,9 @@ export const createPost = async (data: { title: string; body: string }) => {
       }
     })
 
-    console.log(res)
+    return res.status
   } catch (error) {
-    console.log(error)
+    return { code: 404 }
   }
 }
 
