@@ -159,6 +159,22 @@ export const getPostByID = async (id: string) => {
   }
 }
 
+export const getPostsByUserID = async (id: string) => {
+  try {
+    const res = await instance({
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: `/api/users/${id}/posts`
+    })
+
+    return res.data.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getAllComments = async (post_id: string) => {
   try {
     const res = await instance({
