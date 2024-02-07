@@ -81,7 +81,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
             <img alt='up vote icon' src='/icons/share-icon.svg' />
             {viewMode && <p className='whitespace-nowrap my-auto text-sm text-black'>Share</p>}
           </Button>
-          {userData().id === post?.user?.id && (
+          {userData()?.id === post?.user?.id && (
             <>
               <Button
                 variant='ghost'
