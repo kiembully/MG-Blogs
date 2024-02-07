@@ -28,13 +28,12 @@ const Interaction = ({ post }: InterfactionProps) => {
   const addCommentHandler = async () => {
     if (post.id && post.user) {
       if (newPost.comment.length <= 0) {
-        setLoading(true)
-        setLoading(false)
         setError(true)
         setResMessage('Comment cannot be empty.')
         return
       }
 
+      setLoading(true)
       const res: any = await addComment(post.id, {
         message: newPost.comment,
         voteCounts: { upVotes: [], downVotes: [] },
