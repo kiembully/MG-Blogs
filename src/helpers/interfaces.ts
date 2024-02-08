@@ -24,7 +24,7 @@ export interface Post {
   title: string
   body: string
   tags: string[]
-  voteCounts: VoteCount
+  votes: VoteCount
   image?: string | Blob
   commentsCount: number
   createdAt?: string
@@ -47,7 +47,7 @@ export interface Comment {
   message: string
   createdAt?: string //this is date and time
   updatedAt?: string //this is date and time
-  voteCounts: VoteCount
+  votes: VoteCount
   comments?: Comment[]
   user?: {
     id: number
@@ -56,8 +56,8 @@ export interface Comment {
 }
 
 export interface VoteCount {
-  upVotes: string[] //array of user id's that has up vote
-  downVotes: string[] //array of user id's that has down vote
+  upvotes: string[] //array of user id's that has up vote
+  downvotes: string[] //array of user id's that has down vote
   //will use hashmap to check if a user has upvoted or downvoted the post or comment to render correct icon. It will have O(1) notation.
 }
 

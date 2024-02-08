@@ -106,7 +106,7 @@ export const createPost = async (data: Post) => {
         body: data.body,
         tags: data.tags,
         comments: data.commentsCount,
-        voteCounts: data.voteCounts,
+        voteCounts: data.votes,
         is_draft: data.is_draft
       }
     })
@@ -135,7 +135,7 @@ export const updatePost = async (data: Post) => {
         body: data.body,
         tags: data.tags,
         comments: data.commentsCount,
-        voteCounts: data.voteCounts,
+        voteCounts: data.votes,
         is_draft: data.is_draft
       }
     })
@@ -221,7 +221,7 @@ export const addComment = async (post_id: string, data: Comment) => {
       url: `/api/posts/${post_id}/comments`,
       data: {
         message: data.message,
-        voteCounts: data.voteCounts
+        voteCounts: data.votes
       }
     })
 
@@ -291,6 +291,46 @@ export const deletePost = async (id: string) => {
     })
 
     return res.status
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const postVote = async (post_id: string, postType: string) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    await instance({
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: postType === 'upvote' ? `/api/posts/${post_id}/upvote` : `/api/posts/${post_id}/downvote`
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const commentVote = async (post_id: string, comment_id: string, postType: string) => {
+  try {
+    const token = localStorage.getItem('authorization')
+
+    if (!token) return { message: 'Unauthorized' }
+
+    const res = await instance({
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: postType === 'upvote' ? `/api/posts/${post_id}/comments/${comment_id}/upvote` : `/api/posts/${post_id}/comments/${comment_id}/downvote`
+    })
+
+    console.log(res)
   } catch (error) {
     console.log(error)
   }

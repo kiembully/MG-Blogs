@@ -67,7 +67,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       body: newPost.bodyText,
       tags: newPost.tags,
       commentsCount: 0,
-      voteCounts: { downVotes: [], upVotes: [] },
+      votes: { downvotes: [], upvotes: [] },
       is_draft: false
     })
 
@@ -99,7 +99,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       body: newPost.bodyText,
       tags: newPost.tags,
       commentsCount: newPost.commentsCount,
-      voteCounts: { downVotes: [], upVotes: [] },
+      votes: { downvotes: [], upvotes: [] },
       id: postId || '',
       is_draft: false
     })
@@ -154,7 +154,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
         body: newPost.bodyText,
         tags: newPost.tags,
         commentsCount: 0,
-        voteCounts: { downVotes: [], upVotes: [] },
+        votes: { downvotes: [], upvotes: [] },
         is_draft: true
       })
 
@@ -176,7 +176,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
         body: newPost.bodyText,
         tags: newPost.tags,
         commentsCount: newPost.commentsCount,
-        voteCounts: { downVotes: [], upVotes: [] },
+        votes: { downvotes: [], upvotes: [] },
         id: postId || '',
         is_draft: true
       })
