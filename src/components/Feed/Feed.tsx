@@ -34,7 +34,6 @@ const Feed: FC = () => {
   useEffect(() => {
     const tag = params['tag-id']
     if (tag) {
-      console.log(filterObjectsByTag(posts, `@${tag}`))
       setLocalPosts(filterObjectsByTag(posts, `@${tag}`))
     } else {
       setLocalPosts(posts)
