@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import TextArea from '.'
-import React from 'react'
 
 describe('Text area', () => {
   it('should display a text area with label', () => {
@@ -14,3 +13,4 @@ describe('Text area', () => {
     expect(screen.getByLabelText('text-area')).toBeEnabled()
   })
 })
+
