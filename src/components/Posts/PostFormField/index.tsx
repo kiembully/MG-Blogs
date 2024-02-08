@@ -11,6 +11,7 @@ type CreatePostTypes = {
   bodyText: string
   tags: string[]
   commentsCount: number
+  is_draft: boolean
 }
 
 type PostFormFieldProps = {
@@ -25,7 +26,8 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     title: '',
     bodyText: '',
     tags: [],
-    commentsCount: 0
+    commentsCount: 0,
+    is_draft: false
   })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +67,8 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       body: newPost.bodyText,
       tags: newPost.tags,
       commentsCount: 0,
-      voteCounts: { downVotes: [], upVotes: [] }
+      voteCounts: { downVotes: [], upVotes: [] },
+      is_draft: false
     })
 
     if (res === 200) {
@@ -97,7 +100,8 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       tags: newPost.tags,
       commentsCount: newPost.commentsCount,
       voteCounts: { downVotes: [], upVotes: [] },
-      id: postId || ''
+      id: postId || '',
+      is_draft: false
     })
 
     if (res === 200) {
@@ -120,7 +124,8 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
         title: res?.title,
         bodyText: res?.body,
         tags: res?.tags,
-        commentsCount: res?.commentsCount
+        commentsCount: res?.commentsCount,
+        is_draft: false
       }
       setNewPost(post)
       setLoading(false)
@@ -134,6 +139,60 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
       fetchPost(postId)
     }
   }, [params['post-id']])
+
+  const handleSaveAsDraft = async () => {
+    if (!newPost.title || !newPost.bodyText) {
+      setError(true)
+      setResMessage('Title and Body text cannot be empty')
+      return
+    }
+
+    if (variant === 'create') {
+      setLoading(true)
+      const res = await createPost({
+        title: newPost.title,
+        body: newPost.bodyText,
+        tags: newPost.tags,
+        commentsCount: 0,
+        voteCounts: { downVotes: [], upVotes: [] },
+        is_draft: true
+      })
+
+      if (res === 200) {
+        setLoading(false)
+        setError(false)
+        setResMessage('Success!')
+        navigate('/')
+      } else {
+        setLoading(false)
+        setError(true)
+        setResMessage('Unable to update post. try again!')
+      }
+    } else {
+      const postId = params['post-id']
+      setLoading(true)
+      const res = await updatePost({
+        title: newPost.title,
+        body: newPost.bodyText,
+        tags: newPost.tags,
+        commentsCount: newPost.commentsCount,
+        voteCounts: { downVotes: [], upVotes: [] },
+        id: postId || '',
+        is_draft: true
+      })
+
+      if (res === 200) {
+        setLoading(false)
+        setError(false)
+        setResMessage('Success!')
+        navigate('/')
+      } else {
+        setLoading(false)
+        setError(true)
+        setResMessage('Unable to update post. try again!')
+      }
+    }
+  }
 
   return (
     <form className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen mt-20' onSubmit={variant === 'create' ? createPostHandler : updatePostHandler}>
@@ -168,7 +227,7 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
         </div>
         <div className='flex items-center flex-row-reverse gap-2 p-6 bg-neutral-100'>
           <Button type='submit'>{variant === 'create' ? 'Post' : 'Update'}</Button>
-          <Button type='button' variant='outlined'>
+          <Button type='button' variant='outlined' onClick={() => handleSaveAsDraft()}>
             Save as Draft
           </Button>
           <p className={`text-left text-xs flex-1 ${error && 'text-[red]'}`}>{resMessage}</p>
