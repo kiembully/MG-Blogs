@@ -29,6 +29,7 @@ interface PostTypes {
 const NavMenu: React.FC = () => {
   const [user, setUser] = useState<User | null>()
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const [searchText, setSearchText] = useState('')
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
   const navigate = useNavigate()
 
@@ -90,6 +91,25 @@ const NavMenu: React.FC = () => {
     }
   }, [])
 
+  // const searchPostHandler = async () => {
+  //   await searchPost(searchText)
+  // }
+
+  // useEffect(() => {
+
+  //   const searchOnKeyPressed = (event: React.KeyboardEvent) => {
+  //     if(event.key === "Enter"){
+  //       searchPostHandler()
+  //     }
+  //   }
+
+  //   window.addEventListener('keydown', searchOnKeyPressed)
+
+  //   return () => {
+  //     window.removeEventListener('keydown', searchOnKeyPressed)
+  //   }
+  // },[])
+
   const renderActiveUserMenu = (): JSX.Element => {
     return (
       <>
@@ -125,6 +145,11 @@ const NavMenu: React.FC = () => {
         </a>
       </>
     )
+  }
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    setSearchText(value)
   }
 
   return (

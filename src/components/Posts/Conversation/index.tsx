@@ -27,16 +27,16 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
   }
 
   const handleReply = async () => {
-    if (!props.id) return
-    if (!userData()) return
+    if (!props.id || !post_id || !userData()) return
     // Implement logic to handle adding a reply
     // console.log(`Replying to comment ${id} with text: ${replyText}`)
-    const res = await addReply(props.id, {
-      sender_name: userData().username,
-      message: replyText,
-      votes: { upvotes: [], downvotes: [] }
+    const res = await addReply(post_id, {
+      id: props.id,
+      message: replyText
     })
   }
+
+  console.log(props)
 
   return (
     <div className='flex flex-col w-full min-h-full px-4 py-2'>
@@ -54,14 +54,14 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
             <Button variant='ghost' onClick={() => handleVote('upvote')}>
               <img alt='up vote icon' src='/icons/arrow.svg' />
             </Button>
-            <p className='text-sm font-medium leading-3 tracking-normal'>{props.votes.upvotes.length + props.votes.downvotes.length}</p>
+            <p className='text-sm font-medium leading-3 tracking-normal'>{props.votes && props.votes.upvotes.length + props.votes.downvotes.length}</p>
             <Button variant='ghost' onClick={() => handleVote('downvote')}>
               <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
             </Button>
           </div>
           <div className='flex flex-row gap-1 items-center justify-center cursor-pointer' onClick={() => setShowReplies((prevState) => !prevState)}>
             <img src='/icons/ion_chatbubbles-outline.svg' alt='' className='h-5 w-5' />
-            <p className='text-neutral-800 text-sm'>{props.comments?.length} Replies</p>
+            <p className='text-neutral-800 text-sm'>{props.replies?.data?.length} Replies</p>
           </div>
           {/* <button onClick={() => setShowReplies(!showReplies)}>{showReplies ? 'Hide Replies' : 'Show Replies'}</button> */}
         </div>
@@ -72,20 +72,20 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
           </button>
         </div>
       </div>
-      {/* {showReplies &&
+      {/* {props.replies &&
+        props.replies.data.map(({ attributes }, index) => {
+          return <p key={index}>{attributes.message}</p>
+        })} */}
+      {showReplies &&
         props.replies &&
-        props.replies.map((reply) => (
+        props.replies.data.map(({ attributes }) => (
           // eslint-disable-next-line react/jsx-key
-          <div className='relative pl-4 overflow-hidden'>
+          <div className='relative ml-4 overflow-hidden'>
             <div className='border-l-2 border-neutral-200 h-full absolute left-3 top-3'></div>
-            <Conversation key={reply.id} {...reply} />
+            <Conversation key={attributes.id} {...attributes} />
           </div>
         ))}
-      <div className='mt-[0.5rem]'>
-        <input type='text' placeholder='Reply...' value={replyText} onChange={(e) => setReplyText(e.target.value)} />
-        <button onClick={handleReply}>Reply</button>
-      </div>
-      </div> */}
+
       <Modal title='Confirmation' isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
         <div className='p-8 border-t border-neutral-200'>
           <p>You must log in to vote.</p>
