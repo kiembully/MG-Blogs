@@ -33,4 +33,3 @@ describe('Authorization', () => {
     expect(authorizationData()).toEqual(mockToken)
   })
 })
-

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import React, { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as router from 'react-router-dom'
 import NavMenu from '.'
@@ -30,4 +30,3 @@ describe('Nav menu', () => {
   //   expect(mockNavigate).toHaveBeenCalledWith('/signup')
   // })
 })
-

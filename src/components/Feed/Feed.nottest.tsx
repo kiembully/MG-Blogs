@@ -15,4 +15,3 @@ describe('Feed component', () => {
     expect(screen.getByLabelText('trending-component')).toBeInTheDocument()
   })
 })
-
