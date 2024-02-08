@@ -107,7 +107,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'} onClick={() => handleConversation(post?.id)}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-neutral-800 text-sm ${viewMode && 'whitespace-nowrap'}`}>
               {post?.commentsCount} {viewMode && 'Comments'}
