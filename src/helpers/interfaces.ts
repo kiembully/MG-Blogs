@@ -33,6 +33,7 @@ export interface Post {
     id: number
     name: string
   }
+  is_draft: boolean
 }
 
 export interface Tags {

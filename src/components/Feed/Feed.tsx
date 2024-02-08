@@ -23,7 +23,7 @@ const Feed: FC = () => {
         <div className='col-span-12 md:col-span-8'>
           <Post variant='all' />
         </div>
-        <div className='col-span-4 hidden md:block'>
+        <div className='col-span-4 hidden md:block relative'>
           <SideMenuContainer variant='feed' isUserActive={isUserActive} />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../../Button'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { addReply, getCommentsByPost } from '../../../api'
 import { Comment } from '../../../helpers'
 import dayjs from 'dayjs'
@@ -11,6 +11,7 @@ import Modal from '../../Modal'
 const Conversation: React.FC<Comment> = (props: Comment) => {
   dayjs.extend(relativeTime)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   const [replyText, setReplyText] = useState<string>('')
   const [showReplies, setShowReplies] = useState<boolean>(false)
@@ -95,7 +96,7 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
           <p>You must log in to vote.</p>
         </div>
         <div className='flex items-center flex-row-reverse gap-2 py-4 px-8 border-t border-neutral-200'>
-          <Button type='button' size='sm'>
+          <Button type='button' size='sm' onClick={() => navigate('/login')}>
             Login
           </Button>
           <Button type='button' size='sm' variant='outlined' onClick={() => setIsOpen(false)}>
