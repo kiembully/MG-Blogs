@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import React, { render, screen } from '@testing-library/react'
 import Tags from '.'
 
 const tags = ['@design-talks', '@react', '@ruby', '@case-studies', '@tech-stack', '@bootcamp']
@@ -21,4 +21,3 @@ describe('Tags', () => {
     })
   })
 })
-

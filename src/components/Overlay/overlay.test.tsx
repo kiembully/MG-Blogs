@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import React, { render, screen } from '@testing-library/react'
 import Overlay from './overlay'
 
 describe('Overlay', () => {
@@ -13,4 +13,3 @@ describe('Overlay', () => {
     expect(screen.getByText('Test Overlay')).toBeInTheDocument()
   })
 })
-

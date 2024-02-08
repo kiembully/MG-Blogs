@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import React, { render, screen } from '@testing-library/react'
 import CommonSpinner from '.'
 
 describe('Common spinner', () => {
@@ -7,4 +7,3 @@ describe('Common spinner', () => {
     expect(screen.getByRole('status')).toBeInTheDocument()
   })
 })
-

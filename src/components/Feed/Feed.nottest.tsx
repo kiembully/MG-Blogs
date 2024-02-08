@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import Feed from './Feed'
 
+// for some reason i get axios error?
+
 describe('Feed component', () => {
   // eslint-disable-next-line react/react-in-jsx-scope
   render(<Feed />)
