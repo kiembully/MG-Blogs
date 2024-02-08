@@ -1,34 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '../../TextField'
 import Button from '../../Button'
-
-type Tag = {
-  name: string
-  selected: boolean
-}
+import { createPost, getPostByID, updatePost } from '../../../api'
+import Overlay from '../../Overlay/overlay'
+import CommonSpinner from '../../CommonSpinner'
+import { useNavigate, useParams } from 'react-router-dom'
 
 type CreatePostTypes = {
   title: string
   bodyText: string
-  tags: Tag[]
+  tags: string[]
+  commentsCount: number
+  is_draft: boolean
 }
 
 type PostFormFieldProps = {
   variant: string
 }
 
+const allTags = ['@design-talks', '@react', '@ruby', '@case-studies', '@tech-stack', '@bootcamp']
+
 const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
+  const navigate = useNavigate()
   const [newPost, setNewPost] = useState<CreatePostTypes>({
     title: '',
     bodyText: '',
-    tags: [
-      { name: '@react', selected: false },
-      { name: '@ruby', selected: false },
-      { name: '@tech-stack', selected: false },
-      { name: '@case-studies', selected: false },
-      { name: '@bootcamp', selected: true },
-      { name: '@design-talks', selected: true }
-    ]
+    tags: [],
+    commentsCount: 0,
+    is_draft: false
   })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,67 +35,205 @@ const PostFormField: React.FC<PostFormFieldProps> = ({ variant }) => {
     setNewPost((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  const handleTagClick = (index: number) => {
+  const handleTagClick = (clickedTag: string) => {
     setNewPost((prevState) => {
       const updatedTags = [...prevState.tags]
-      updatedTags[index] = { ...updatedTags[index], selected: !updatedTags[index].selected }
+      const index = updatedTags.indexOf(clickedTag)
+
+      if (index !== -1) {
+        updatedTags.splice(index, 1)
+      } else {
+        updatedTags.push(clickedTag)
+      }
       return { ...prevState, tags: updatedTags }
     })
   }
 
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [resMessage, setResMessage] = useState<string>()
+  const createPostHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!newPost.title || !newPost.bodyText) {
+      setError(true)
+      setResMessage('Title and Body text cannot be empty')
+      return
+    }
+
+    setLoading(true)
+    const res = await createPost({
+      title: newPost.title,
+      body: newPost.bodyText,
+      tags: newPost.tags,
+      commentsCount: 0,
+      votes: { downvotes: [], upvotes: [] },
+      is_draft: false
+    })
+
+    if (res === 200) {
+      setLoading(false)
+      setError(false)
+      setResMessage('Success!')
+      navigate('/')
+    } else {
+      setLoading(false)
+      setError(true)
+      setResMessage('Unable to create post. try again!')
+    }
+  }
+
+  const updatePostHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!newPost.title || !newPost.bodyText) {
+      setError(true)
+      setResMessage('Title and Body text cannot be empty')
+      return
+    }
+
+    const postId = params['post-id']
+
+    setLoading(true)
+    const res = await updatePost({
+      title: newPost.title,
+      body: newPost.bodyText,
+      tags: newPost.tags,
+      commentsCount: newPost.commentsCount,
+      votes: { downvotes: [], upvotes: [] },
+      id: postId || '',
+      is_draft: false
+    })
+
+    if (res === 200) {
+      setLoading(false)
+      setError(false)
+      setResMessage('Success!')
+      navigate('/')
+    } else {
+      setLoading(false)
+      setError(true)
+      setResMessage('Unable to update post. try again!')
+    }
+  }
+
+  const fetchPost = async (id: string) => {
+    setLoading(true)
+    if (variant === 'update') {
+      const res = await getPostByID(id)
+      const post: CreatePostTypes = {
+        title: res?.title,
+        bodyText: res?.body,
+        tags: res?.tags,
+        commentsCount: res?.commentsCount,
+        is_draft: false
+      }
+      setNewPost(post)
+      setLoading(false)
+    }
+  }
+
+  const params = useParams()
+  useEffect(() => {
+    const postId = params['post-id']
+    if (postId) {
+      fetchPost(postId)
+    }
+  }, [params['post-id']])
+
+  const handleSaveAsDraft = async () => {
+    if (!newPost.title || !newPost.bodyText) {
+      setError(true)
+      setResMessage('Title and Body text cannot be empty')
+      return
+    }
+
+    if (variant === 'create') {
+      setLoading(true)
+      const res = await createPost({
+        title: newPost.title,
+        body: newPost.bodyText,
+        tags: newPost.tags,
+        commentsCount: 0,
+        votes: { downvotes: [], upvotes: [] },
+        is_draft: true
+      })
+
+      if (res === 200) {
+        setLoading(false)
+        setError(false)
+        setResMessage('Success!')
+        navigate('/')
+      } else {
+        setLoading(false)
+        setError(true)
+        setResMessage('Unable to update post. try again!')
+      }
+    } else {
+      const postId = params['post-id']
+      setLoading(true)
+      const res = await updatePost({
+        title: newPost.title,
+        body: newPost.bodyText,
+        tags: newPost.tags,
+        commentsCount: newPost.commentsCount,
+        votes: { downvotes: [], upvotes: [] },
+        id: postId || '',
+        is_draft: true
+      })
+
+      if (res === 200) {
+        setLoading(false)
+        setError(false)
+        setResMessage('Success!')
+        navigate('/')
+      } else {
+        setLoading(false)
+        setError(true)
+        setResMessage('Unable to update post. try again!')
+      }
+    }
+  }
+
   return (
-    <div className='pt-8 px-4 mx-auto max-w-[840px] min-h-screen'>
-      <div className='flex'>
-        <h1 className='flex-auto'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
-        <p>
-          Draft <span>12</span>
+    <form className='pt-8 px-4 mx-auto max-w-[640px] min-h-screen mt-20' onSubmit={variant === 'create' ? createPostHandler : updatePostHandler}>
+      <div className='flex mb-4'>
+        <h1 className='flex-auto text-25 font-bold leading-25 tracking-semibold'>{variant === 'create' ? 'Create Post' : 'Edit Post'}</h1>
+        <p className='text-16 font-medium leading-16 tracking-normal text-indigo-500'>
+          Draft <span className='p-1 bg-[#312E81] text-white text-xs rounded-sm'>12</span>
         </p>
       </div>
-      <div className='p-4 rounded-md bg-white'>
-        <TextField
-          label='Title'
-          type='text'
-          value={newPost.title}
-          name='title'
-          fullWidth
-          onChange={onChange}
-          classNames='mt-2 w-auto'
-        />
-        <TextField
-          label='Body text'
-          type='text'
-          value={newPost.bodyText}
-          name='bodyText'
-          fullWidth
-          onChange={onChange}
-          classNames='mt-2 w-auto'
-        />
-        <div>
-          <p>Tags</p>
-          <div className='flex flex-wrap gap-2'>
-            {newPost.tags.map((tag, index) => (
-              <div
-                className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${
-                  tag.selected && 'text-primary-500 border-primary-500'
-                }`}
-                key={tag.name}
-              >
-                <button className='bg-[transparent]' onClick={() => handleTagClick(index)}>
-                  {tag.selected ? '-' : '+'}
-                </button>
-                {tag.name}
-              </div>
-            ))}
+      <div className='overflow-hidden relative rounded-md bg-white border border-solid border-neutral-200'>
+        <div className='p-6 flex flex-col gap-4'>
+          {loading && (
+            <Overlay>
+              <CommonSpinner />
+            </Overlay>
+          )}
+          <TextField label='Title' type='text' value={newPost.title} name='title' fullWidth onChange={onChange} classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal' disabled={loading} />
+          <TextField label='Body text' type='text' value={newPost.bodyText} name='bodyText' fullWidth onChange={onChange} classNames='mt-2 w-auto text-base font-medium leading-16 tracking-normal' disabled={loading} />
+          <div>
+            <p className='text-base font-medium leading-16 tracking-normal mb-2'>Tags</p>
+            <div className='flex flex-wrap gap-2'>
+              {allTags.map((tag) => {
+                return (
+                  <button className={`flex justify-center items-center border rounded-md px-2 py-1 whitespace-nowrap gap-1 ${newPost.tags.includes(tag) && 'text-primary-500 border-primary-500'}`} key={tag} type='button' onClick={() => handleTagClick(tag)}>
+                    <div>{newPost.tags.includes(tag) ? '-' : '+'}</div>
+                    {tag}
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </div>
-        <div className='flex flex-row-reverse gap-2'>
-          <Button classNames='mt-6'>{variant === 'create' ? 'Post' : 'Update'}</Button>
-          <Button classNames='mt-6' variant='outlined'>
+        <div className='flex items-center flex-row-reverse gap-2 p-6 bg-neutral-100'>
+          <Button type='submit'>{variant === 'create' ? 'Post' : 'Update'}</Button>
+          <Button type='button' variant='outlined' onClick={() => handleSaveAsDraft()}>
             Save as Draft
           </Button>
+          <p className={`text-left text-xs flex-1 ${error && 'text-[red]'}`}>{resMessage}</p>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
 

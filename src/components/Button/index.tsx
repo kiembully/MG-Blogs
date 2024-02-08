@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react'
 import cn from 'classnames'
 
 type Props = {
+  type?: 'button' | 'submit' | 'reset'
   children: ReactNode
   variant?: 'default' | 'ghost' | 'outlined'
   size?: 'sm' | 'md' | 'lg'
@@ -11,15 +12,7 @@ type Props = {
   onClick?: () => void
 }
 
-const Button: FC<Props> = ({
-  children,
-  variant = 'default',
-  size = 'md',
-  classNames,
-  fullWidth,
-  disabled,
-  onClick
-}) => {
+const Button: FC<Props> = ({ type = 'button', children, variant = 'default', size = 'md', classNames, fullWidth, disabled, onClick }) => {
   const renderButtonStyle = (val: string) => {
     switch (val) {
       case 'ghost': {
@@ -35,17 +28,7 @@ const Button: FC<Props> = ({
   }
 
   return (
-    <button
-      type='button'
-      className={cn(
-        `cursor-pointer text-${size}`,
-        renderButtonStyle(variant),
-        classNames,
-        fullWidth ? 'w-full' : 'w-max'
-      )}
-      disabled={disabled}
-      onClick={onClick}
-    >
+    <button type={type} className={cn(`cursor-pointer text-${size}`, renderButtonStyle(variant), classNames, fullWidth ? 'w-full' : 'w-max', disabled && 'bg-neutral-300 cursor-not-allowed')} disabled={disabled} onClick={onClick} aria-label='button'>
       {children}
     </button>
   )

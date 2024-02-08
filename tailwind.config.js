@@ -14,6 +14,7 @@ module.exports = {
         'neutral-200': '#D2D2D3',
         'neutral-800': '#111215',
         orange: '#C8512C',
+        'primary-50': '#EEF2FF',
         'primary-500': '#6366F1'
       },
       spacing: {
