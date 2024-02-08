@@ -11,7 +11,6 @@ const ViewPost = () => {
   const [post, setPost] = useState<Post>()
 
   const getPostHandler = async () => {
-    console.log('getPostHandler')
     if (!post_id) return navigate('/')
 
     const res = await getPostByID(post_id)

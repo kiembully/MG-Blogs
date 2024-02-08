@@ -277,15 +277,23 @@ export const getCommentByID = async (post_id: string, comment_id: string) => {
   }
 }
 
-export const addReply = async (comment_id: string, data: Comment) => {
-  console.log(comment_id)
-  console.log(data)
+export const addReply = async (post_id: string, data: Comment) => {
+  const token = localStorage.getItem('authorization')
+
+  if (!token) return { message: 'Unauthorized' }
   try {
-    // const res = await instance({
-    //   method:"POST",
-    //   url: ``
-    // })
-    // return res
+    const res = await instance({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      url: `/api/posts/${post_id}/comments/${data.id}`,
+      data: {
+        message: data.message
+      }
+    })
+    return res.data.data.attributes
   } catch (error) {
     console.log(error)
   }
@@ -347,6 +355,22 @@ export const commentVote = async (post_id: string, comment_id: string, postType:
     })
 
     console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const searchPost = async (searchText: string) => {
+  try {
+    console.log(searchText)
+    // const res = await instance({
+    //   method: 'GET',
+    //   url: `/api/posts/${searchText}`
+    // })
+
+    // const data = res.data.data.map((item: any) => item.attributes) || []
+
+    // return data
   } catch (error) {
     console.log(error)
   }
