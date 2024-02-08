@@ -56,7 +56,7 @@ const NavMenu = () => {
           </p>
         </div>
         <div className='flex flex-auto px-10 justify-center'>
-          <div className='hidden items-center max-w-[600px] h-12 bg-neutral-100 w-full px-4 rounded-md flex lg:flex'>
+          <div className='items-center max-w-[600px] h-12 bg-neutral-100 w-full px-4 rounded-md flex lg:flex'>
             <img alt='search icon' src='./icons/search-icon.png' className='h-md' />
             <input className='bg-[transparent] w-full outline-none px-3' type='text' placeholder='Search Post' />
           </div>
@@ -68,3 +68,4 @@ const NavMenu = () => {
 }
 
 export default NavMenu
+
