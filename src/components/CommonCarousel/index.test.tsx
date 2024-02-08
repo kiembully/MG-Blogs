@@ -9,4 +9,3 @@ describe('Common Carousel', () => {
     // expect(screen.getByText(/react-multi-carousel-list/)).toBeInTheDocument()
   })
 })
-

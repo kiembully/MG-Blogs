@@ -7,4 +7,3 @@ describe('Common spinner', () => {
     expect(screen.getByRole('status')).toBeInTheDocument()
   })
 })
-
