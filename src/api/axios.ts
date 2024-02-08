@@ -70,6 +70,24 @@ export const signin = async (data: LoginCredentials) => {
   }
 }
 
+export const getUserByID = async (user_id: string) => {
+  try {
+    const res = await instance({
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: `/api/users/${user_id}`
+    })
+
+    console.log(res)
+
+    return res.data.data.attributes
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const createPost = async (data: Post) => {
   try {
     const token = localStorage.getItem('authorization')

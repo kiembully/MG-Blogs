@@ -64,7 +64,7 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
               <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
             </Button>
           </div>
-          <div className='flex flex-row gap-1 items-center justify-center' onClick={() => setShowReplies((prevState) => !prevState)}>
+          <div className='flex flex-row gap-1 items-center justify-center cursor-pointer' onClick={() => setShowReplies((prevState) => !prevState)}>
             <img src='/icons/ion_chatbubbles-outline.svg' alt='' className='h-5 w-5' />
             <p className='text-neutral-800 text-sm'>{props.comments?.length} Replies</p>
           </div>
