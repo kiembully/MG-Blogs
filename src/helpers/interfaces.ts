@@ -43,12 +43,18 @@ export interface Tags {
 
 export interface Comment {
   id?: string
-  sender_name: string
+  sender_name?: string
   message: string
   createdAt?: string //this is date and time
   updatedAt?: string //this is date and time
-  votes: VoteCount
-  comments?: Comment[]
+  votes?: VoteCount
+  replies?: {
+    data: [
+      {
+        attributes: Comment
+      }
+    ]
+  }
   user?: {
     id: number
     name: string

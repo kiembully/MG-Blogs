@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { User } from '../helpers'
 import { ProfileOptionModal } from './index'
 import { useNavigate } from 'react-router-dom'
+import { searchPost } from '../api'
 
 const NavMenu: React.FC = () => {
   const [user, setUser] = useState<User | null>()
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+  const [searchText, setSearchText] = useState('')
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
   const navigate = useNavigate()
 
@@ -29,6 +31,25 @@ const NavMenu: React.FC = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  // const searchPostHandler = async () => {
+  //   await searchPost(searchText)
+  // }
+
+  // useEffect(() => {
+
+  //   const searchOnKeyPressed = (event: React.KeyboardEvent) => {
+  //     if(event.key === "Enter"){
+  //       searchPostHandler()
+  //     }
+  //   }
+
+  //   window.addEventListener('keydown', searchOnKeyPressed)
+
+  //   return () => {
+  //     window.removeEventListener('keydown', searchOnKeyPressed)
+  //   }
+  // },[])
 
   const renderActiveUserMenu = (): JSX.Element => {
     return (
@@ -67,6 +88,11 @@ const NavMenu: React.FC = () => {
     )
   }
 
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    setSearchText(value)
+  }
+
   return (
     <div className={`bg-white px-0 px-8 md:px-16 fixed w-full top-0 z-10 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
       <div className='flex gap-4 min-h-20 justify-center items-center w-full mx-auto max-w-[1440px] px-4 lg:px-8'>
@@ -78,7 +104,7 @@ const NavMenu: React.FC = () => {
         <div className='flex flex-auto px-12 justify-center'>
           <div className='hidden items-center max-w-[600px] h-12 bg-neutral-100 w-full px-4 rounded-md flex lg:flex'>
             <img alt='search icon' src='/icons/search-icon.png' className='h-md' />
-            <input className='bg-[transparent] w-full outline-none px-3' type='text' placeholder='Search Post' />
+            <input className='bg-[transparent] w-full outline-none px-3' type='text' placeholder='Search Post' onChange={onChangeHandler} />
           </div>
         </div>
         <div className='flex gap-4'>{user ? renderActiveUserMenu() : renderDefaultUserMenu()}</div>
