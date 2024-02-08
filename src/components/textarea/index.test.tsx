@@ -13,4 +13,3 @@ describe('Text area', () => {
     expect(screen.getByLabelText('text-area')).toBeEnabled()
   })
 })
-

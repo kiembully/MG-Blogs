@@ -13,4 +13,3 @@ describe('Overlay', () => {
     expect(screen.getByText('Test Overlay')).toBeInTheDocument()
   })
 })
-

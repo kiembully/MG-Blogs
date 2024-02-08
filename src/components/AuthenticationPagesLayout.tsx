@@ -21,9 +21,12 @@ const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: Childr
 
   return (
     <PageLayout>
-      <div className='relative h-screen w-screen flex flex-row'>
-        <img src='/assets/mg-background.png' alt='mg-background' className='relative h-full w-1/2 aspect-auto hidden md:flex' />
-        <div className='relative h-full w-full md:w-1/2 bg-white flex flex-col items-center justify-center py-4 md:py-8'>{children}</div>
+      <div className='relative h-screen w-screen flex flex-row overflow-hidden'>
+        <div className='h-full w-1/2 bg-[#17181C]'>
+          <img height='24px' src='/assets/mg-logo-2.svg' alt='mg-logo' className='absolute top-10 left-10 z-10' />
+          <img width='60%' src='/assets/mg-logo-big.svg' alt='mg-logo' className='min-w-[700px] max-w-[1000px] absolute -bottom-48 -left-48 z-10' />
+        </div>
+        <div className='relative h-full w-full md:w-1/2 bg-white flex flex-col items-center justify-center py-4 md:py-8 z-20'>{children}</div>
       </div>
     </PageLayout>
   )
