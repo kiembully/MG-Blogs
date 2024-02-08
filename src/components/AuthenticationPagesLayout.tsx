@@ -21,7 +21,7 @@ const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: Childr
 
   return (
     <PageLayout>
-      <div className='relative h-screen w-screen flex flex-row '>
+      <div className='relative h-screen w-screen flex flex-row overflow-hidden'>
         <div className='h-full w-0 sm:w-1/2 bg-[#17181C]'>
           <a href='/' className='absolute top-10 left-10 z-10 hidden sm:block'>
             <img height='24px' src='/assets/mg-logo-2.svg' alt='mg-logo' />

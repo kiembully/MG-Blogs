@@ -80,9 +80,25 @@ export const getUserByID = async (user_id: string) => {
       url: `/api/users/${user_id}`
     })
 
+    return res.data.data.attributes
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getTrendingTopics = async () => {
+  try {
+    const res = await instance({
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: '/api/posts/trending'
+    })
+
     console.log(res)
 
-    return res.data.data.attributes
+    return res
   } catch (error) {
     console.log(error)
   }
