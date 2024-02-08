@@ -222,4 +222,3 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
 }
 
 export default PostCard
-

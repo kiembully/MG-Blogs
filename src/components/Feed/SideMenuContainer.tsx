@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 type Props = {
   variant?: 'feed' | 'profile'
-  isUserActive?: boolean // profile states
+  isUserActive?: boolean
 }
 
 const SideMenuContainer: FC<Props> = ({ variant, isUserActive }) => {
