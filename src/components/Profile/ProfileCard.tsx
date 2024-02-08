@@ -28,7 +28,7 @@ const ProfileCard = () => {
       </div>
       <Modal title='Confirmation' isOpen={isOpen} setClose={() => setIsOpen(!isOpen)}>
         <div className='p-8 border-t border-neutral-200'>
-          <p>You must log in to vote.</p>
+          <p>You must log in to interact with other users.</p>
         </div>
         <div className='flex items-center flex-row-reverse gap-2 py-4 px-8 border-t border-neutral-200'>
           <Button type='button' size='sm' onClick={() => navigate('/login')}>
