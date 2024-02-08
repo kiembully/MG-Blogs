@@ -88,7 +88,8 @@ export const createPost = async (data: Post) => {
         body: data.body,
         tags: data.tags,
         comments: data.commentsCount,
-        voteCounts: data.voteCounts
+        voteCounts: data.voteCounts,
+        is_draft: data.is_draft
       }
     })
 
@@ -116,7 +117,8 @@ export const updatePost = async (data: Post) => {
         body: data.body,
         tags: data.tags,
         comments: data.commentsCount,
-        voteCounts: data.voteCounts
+        voteCounts: data.voteCounts,
+        is_draft: data.is_draft
       }
     })
 
