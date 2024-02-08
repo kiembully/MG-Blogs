@@ -23,8 +23,12 @@ const AuthenticationPagesLayout: React.FC<ChildrenProps> = ({ children }: Childr
     <PageLayout>
       <div className='relative h-screen w-screen flex flex-row '>
         <div className='h-full w-0 sm:w-1/2 bg-[#17181C]'>
-          <img height='24px' src='/assets/mg-logo-2.svg' alt='mg-logo' className='absolute top-10 left-10 z-10 hidden sm:block' />
-          <img height='24px' src='/assets/mg-logo.svg' alt='mg-logo' className='w-[45px] absolute top-4 left-4 z-10 block sm:hidden' />
+          <a href='/' className='absolute top-10 left-10 z-10 hidden sm:block'>
+            <img height='24px' src='/assets/mg-logo-2.svg' alt='mg-logo' />
+          </a>
+          <a href='/' className='w-[45px] z-30 absolute top-4 left-4 z-10 block sm:hidden'>
+            <img height='24px' src='/assets/mg-logo.svg' alt='mg-logo' />
+          </a>
           <img width='60%' src='/assets/mg-logo-big.svg' alt='mg-logo' className='min-w-[500px] max-w-[1000px] absolute -bottom-48 -left-48 z-10 hidden sm:block' />
           <img width='60%' src='/assets/mg-logo.svg' alt='mg-logo' className='min-w-[500px] max-w-[1000px] absolute -bottom-48 -left-48 z-10 block sm:hidden opacity-[0.4]' />
         </div>
