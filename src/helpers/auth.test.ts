@@ -29,4 +29,3 @@ describe('checkTokenExpiration', () => {
   //   expect(checkTokenExpiration(validToken)).toBe(true)
   // })
 })
-

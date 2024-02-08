@@ -19,4 +19,3 @@ export const checkTokenExpiration = (token: string) => {
     return true
   }
 }
-
