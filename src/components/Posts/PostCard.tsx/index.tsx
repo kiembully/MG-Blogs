@@ -82,22 +82,20 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
     setIsOpen(true)
   }
 
-  const handleVote = (vote: string) => {
+  const handleVote = (voteType: string) => {
+    if (voteType === 'upvote') {
+    } else {
+    }
+
     // apply logic here
     if (!userData()) {
       handleModal('logout')
       return
     }
-
-    console.log(vote)
   }
 
   return (
-    <div
-      className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse relative'}`}
-      ref={conversationRef}
-      // onClick={() => navigate(`/post/${post?.id}/view-post`)}
-    >
+    <div className={`flex w-full min-h-52 bg-white mb-4 rounded-md shadow-lg overflow-hidden z-0 ${viewMode && 'flex-col-reverse relative'}`} ref={conversationRef}>
       {viewMode && <Conversation />}
       {viewMode && userData() && post && <Interaction post={post} />}
       <div className={`flex min-h-full gap-4 p-4 ${viewMode ? 'flex-row' : 'flex-col bg-neutral-100  w-14'}`}>
@@ -111,7 +109,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           </Button>
         </div>
         <div className={`flex items-center ${viewMode ? 'flex-row w-full gap-4' : 'flex-col'}`}>
-          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'} onClick={() => handleConversation(post?.id)}>
+          <Button variant='ghost' classNames={viewMode ? 'flex gap-1' : 'mt-8'}>
             <img alt='up vote icon' src='/icons/ion_chatbubbles-outline.svg' />
             <p className={`text-neutral-800 text-sm ${viewMode && 'whitespace-nowrap'}`}>
               {post?.commentsCount} {viewMode && 'Comments'}
@@ -135,7 +133,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           )}
         </div>
       </div>
-      <div className='w-full p-4'>
+      <div className='w-full p-4  cursor-pointer' onClick={() => handleConversation(post?.id)}>
         <div className='mb-4'>
           <div className='flex gap-2 flex-auto items-center'>
             <img alt='post avatar' src='/icons/default-avatar.png' className='h-5 w-5' />
