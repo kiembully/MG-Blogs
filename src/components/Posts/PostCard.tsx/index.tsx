@@ -117,7 +117,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
               {post?.commentsCount} {viewMode && 'Comments'}
             </p>
           </Button>
-          <Button variant='ghost' classNames={viewMode ? 'flex flex-1 gap-1' : ''}>
+          <Button variant='ghost' classNames={viewMode ? 'flex flex-1 gap-1' : ''} onClick={() => handleFacebookShare(post?.id)}>
             <img alt='up vote icon' src='/icons/share-icon.svg' />
             {viewMode && <p className='whitespace-nowrap my-auto text-sm text-neutral-800'>Share</p>}
           </Button>
@@ -209,7 +209,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
               <p>You must log in to vote.</p>
             </div>
             <div className='flex items-center flex-row-reverse gap-2 py-4 px-8 border-t border-neutral-200'>
-              <Button type='button' size='sm'>
+              <Button type='button' size='sm' onClick={() => navigate('/login')}>
                 Login
               </Button>
               <Button type='button' size='sm' variant='outlined' onClick={() => setIsOpen(false)}>
