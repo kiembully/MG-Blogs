@@ -38,7 +38,6 @@ const ProfileCard = () => {
   return (
     <div className='flex flex-col min-h-[12rem] bg-white rounded-md w-full overflow-hidden'>
       <div className='min-h-[8rem] bg-indigo-500 w-full'></div>
-      <div className='size-[4.5rem] rounded-full bg-neutral-100 border-[4px] border-[white] mt-[-2.25rem] ml-[1.5rem]'></div>
       <div className='size-[4.5rem] rounded-full bg-neutral-100 border-[4px] border-[white] mt-[-2.25rem] ml-[1.5rem] overflow-hidden'></div>
       <div className='flex flex-col px-[1.5rem] py-[1rem] gap-2'>
         <p>{user?.name}</p>
