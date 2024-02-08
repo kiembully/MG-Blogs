@@ -11,7 +11,6 @@ import Modal from '../../Modal'
 import { deletePost, postVote } from '../../../api'
 import CommonSpinner from '../../CommonSpinner'
 import Overlay from '../../Overlay/overlay'
-import { FacebookShareButton } from 'react-share'
 
 type Props = {
   viewMode?: boolean
