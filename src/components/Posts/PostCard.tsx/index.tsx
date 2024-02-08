@@ -8,7 +8,7 @@ import { userData } from '../../../hooks'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from 'dayjs'
 import Modal from '../../Modal'
-import { deletePost } from '../../../api'
+import { deletePost, postVote } from '../../../api'
 import CommonSpinner from '../../CommonSpinner'
 import Overlay from '../../Overlay/overlay'
 import { FacebookShareButton } from 'react-share'
@@ -82,11 +82,9 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
     setIsOpen(true)
   }
 
-  const handleVote = (voteType: string) => {
-    if (voteType === 'upvote') {
-    } else {
-    }
-
+  const handleVote = async (voteType: string) => {
+    if (!post || !post.id) return
+    await postVote(post.id, voteType)
     // apply logic here
     if (!userData()) {
       handleModal('logout')
@@ -103,7 +101,7 @@ const PostCard: FC<Props> = ({ viewMode, post }) => {
           <Button variant='ghost' onClick={() => handleVote('upvote')}>
             <img alt='up vote icon' src='/icons/arrow.svg' />
           </Button>
-          <p className='text-sm text-neutral-800'>{post?.voteCounts ? post.voteCounts.upVotes.length + post.voteCounts.downVotes.length : 0}</p>
+          <p className='text-sm text-neutral-800'>{post?.votes ? post.votes.upvotes.length + post.votes.downvotes.length : 0}</p>
           <Button variant='ghost' onClick={() => handleVote('downvote')}>
             <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
           </Button>

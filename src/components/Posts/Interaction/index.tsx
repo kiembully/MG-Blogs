@@ -36,7 +36,7 @@ const Interaction = ({ post }: InterfactionProps) => {
       setLoading(true)
       const res: any = await addComment(post.id, {
         message: newPost.comment,
-        voteCounts: { upVotes: [], downVotes: [] },
+        votes: { upvotes: [], downvotes: [] },
         sender_name: post.user.name
       })
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../../Button'
 import { useNavigate, useParams } from 'react-router-dom'
-import { addReply, getCommentsByPost } from '../../../api'
+import { addReply, commentVote, getCommentsByPost } from '../../../api'
 import { Comment } from '../../../helpers'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -12,23 +12,18 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
   dayjs.extend(relativeTime)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const navigate = useNavigate()
+  const { post_id } = useParams()
 
   const [replyText, setReplyText] = useState<string>('')
   const [showReplies, setShowReplies] = useState<boolean>(false)
 
-  const [commentVotes, setCommentVotes] = useState<number>(0)
-  const handleVote = (voteType: 'upvote' | 'downvote') => {
-    console.log('asd')
-    if (!userData()) {
+  const handleVote = async (voteType: 'upvote' | 'downvote') => {
+    if (!userData() || !post_id || !props.id) {
       setIsOpen(true)
       return
     }
     // Implement logic to handle upvote and downvote
-    if (voteType === 'upvote') {
-      setCommentVotes(commentVotes + 1)
-    } else if (voteType === 'downvote') {
-      setCommentVotes(commentVotes - 1)
-    }
+    await commentVote(post_id, props.id, voteType)
   }
 
   const handleReply = async () => {
@@ -39,7 +34,7 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
     const res = await addReply(props.id, {
       sender_name: userData().username,
       message: replyText,
-      voteCounts: { upVotes: [], downVotes: [] }
+      votes: { upvotes: [], downvotes: [] }
     })
   }
 
@@ -59,7 +54,7 @@ const Conversation: React.FC<Comment> = (props: Comment) => {
             <Button variant='ghost' onClick={() => handleVote('upvote')}>
               <img alt='up vote icon' src='/icons/arrow.svg' />
             </Button>
-            <p className='text-sm font-medium leading-3 tracking-normal'>{commentVotes}</p>
+            <p className='text-sm font-medium leading-3 tracking-normal'>{props.votes.upvotes.length + props.votes.downvotes.length}</p>
             <Button variant='ghost' onClick={() => handleVote('downvote')}>
               <img className='rotate-180' alt='up vote icon' src='/icons/arrow.svg' />
             </Button>
